@@ -1,15 +1,32 @@
 "use server"
 import GenerateRandomID from "@/utils/generateRandomID";
+import {prisma} from "@/lib/prisma";
 
 export default async function GenerateShortURL(originalURL: string) {
-    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    if (!originalURL) return;
+
     const randomID = GenerateRandomID(6)
-    const shortURL = `https://shortly.com/${randomID}`
+    const BASE_URL = process.env.BASE_URL;
+
+    const shortURL = `${BASE_URL}${randomID}`
+
     const data = {
         originalURL,
-        shortURL
+        shortURL,
+        generatedID: randomID
     }
 
-    return {success: true, data}
+    try {
+        await prisma.link.create({
+            data: data
+        })
+        return {success: true}
+
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return {success: false, error}
+        }
+    }
 
 }

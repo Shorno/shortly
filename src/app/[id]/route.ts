@@ -1,12 +1,21 @@
-import { redirect } from 'next/navigation';
 import {type NextRequest} from 'next/server'
+import {prisma} from "@/lib/prisma";
+import {redirect} from "next/navigation";
 
 
 export async function GET(request: NextRequest, {params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
-    if (id == "123"){
-        redirect("https://www.youtube.com/");
+    const existingLink = await prisma.link.findUnique({
+        where: {
+            generatedID: id
+        }
+    })
+
+
+    if (!existingLink) {
+        return new Response('Not found', {status: 404});
     }
 
-    return new Response(`Hello world ${id}`)
+    redirect(existingLink.originalURL)
+
 }

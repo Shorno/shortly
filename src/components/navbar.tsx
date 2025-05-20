@@ -4,7 +4,7 @@ import {ThemeToggle} from "@/components/theme-toogle";
 
 export default function Navbar() {
     return (
-        <nav className={"mx-auto container flex items-center justify-between py-4"}>
+        <nav className={"mx-auto container flex items-center justify-between py-4 px-4 lg:px-0"}>
             <div>
                 <Link href={"/"} className={"text-3xl font-semibold"}>Shortly</Link>
             </div>
