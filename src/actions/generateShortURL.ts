@@ -1,7 +1,8 @@
 "use server"
 import GenerateRandomID from "@/utils/generateRandomID";
-import {prisma} from "@/lib/prisma";
 import {revalidatePath} from "next/cache";
+import {db} from "@/db";
+import {links} from "@/db/schema";
 
 export default async function GenerateShortURL(originalURL: string) {
 
@@ -19,9 +20,7 @@ export default async function GenerateShortURL(originalURL: string) {
     }
 
     try {
-        await prisma.link.create({
-            data: data
-        })
+        await db.insert(links).values(data)
         revalidatePath("/")
         return {success: true}
 

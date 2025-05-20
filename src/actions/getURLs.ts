@@ -1,5 +1,6 @@
 "use server"
-import {prisma} from "@/lib/prisma";
+
+import {db} from "@/db";
 
 interface ShortURL {
     id: number;
@@ -10,5 +11,5 @@ interface ShortURL {
 
 
 export default async function GetURLs(): Promise<ShortURL[]> {
-    return prisma.link.findMany();
+    return db.query.links.findMany();
 }
