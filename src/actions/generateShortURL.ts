@@ -3,20 +3,25 @@ import GenerateRandomID from "@/utils/generateRandomID";
 import {revalidatePath} from "next/cache";
 import {db} from "@/db";
 import {links} from "@/db/schema";
+import GetMetadata from "@/utils/getMetadata";
 
 export default async function GenerateShortURL(originalURL: string) {
 
     if (!originalURL) return;
 
     const randomID = GenerateRandomID(6)
-    const BASE_URL = process.env.BASE_URL;
-
+    const BASE_URL = process.env.BASE_URL as string;
     const shortURL = `${BASE_URL}${randomID}`
+
+    const {title, favicon} = await GetMetadata(originalURL)
+
 
     const data = {
         originalURL,
         shortURL,
-        generatedID: randomID
+        generatedID: randomID,
+        siteTitle: title,
+        siteFavicon: favicon
     }
 
     try {

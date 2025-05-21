@@ -2,11 +2,13 @@
 
 import {db} from "@/db";
 
-interface ShortURL {
+export interface ShortURL {
     id: number;
     generatedID: string;
     originalURL: string;
     shortURL: string;
+    siteFavicon: string,
+    siteTitle : string
 }
 
 

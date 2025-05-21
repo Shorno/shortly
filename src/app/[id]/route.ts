@@ -14,5 +14,4 @@ export async function GET(request: NextRequest, {params}: { params: Promise<{ id
     }
 
     redirect(existingLink.originalURL)
-
 }
