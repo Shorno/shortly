@@ -1,14 +1,10 @@
-import {ShortURL} from "@/actions/getURLs";
+import GetURLs from "@/actions/getURLs";
 import LinkCard from "@/components/link-card";
 
-
-interface LinksProps {
-    links: ShortURL[]
-}
-
-export default function Links({links}: LinksProps) {
+export default async function Links() {
+    const links = await GetURLs();
     return (
-        <div className={"flex flex-col gap-4"}>
+        <div className={"flex flex-col gap-4 md:min-w-2xl"}>
             {
                 links.map((link) => (
                     <LinkCard

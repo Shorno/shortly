@@ -4,10 +4,10 @@ import {ShortURL} from "@/actions/getURLs";
 
 export default function LinkDisplay({originalURL, shortURL, siteTitle, siteFavicon}: ShortURL) {
     return (
-        <div className={"flex gap-4"}>
+        <div className={"flex md:gap-4"}>
             <div className={"flex mt-1"}>
                 <Image src={siteFavicon} alt={siteTitle} width={24} height={24}
-                       className={"rounded-full object-cover size-8"}/>
+                       className={"rounded-full object-cover size-8 hidden md:flex"}/>
             </div>
             <div className={"flex flex-col gap-1"}>
 

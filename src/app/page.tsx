@@ -1,16 +1,19 @@
 import LinkForm from "@/components/link-form";
-import GetURLs from "@/actions/getURLs";
 import Links from "@/components/links";
+import {Suspense} from "react";
+import LinksLoading from "@/components/links-loading";
 
 
-export default async function Home() {
-    const links = await GetURLs();
+export default function Home() {
 
     return (
         <div className={"flex justify-center items-center flex-col"}>
             Welcome to Ultimate URL Shortener
             <LinkForm/>
-            <Links links={links}/>
+            <Suspense fallback={<LinksLoading/>}
+            >
+                <Links/>
+            </Suspense>
         </div>
     );
 }
