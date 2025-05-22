@@ -15,7 +15,6 @@ export default async function GenerateShortURL(originalURL: string) {
 
     const {title, favicon} = await GetMetadata(originalURL)
 
-
     const data = {
         originalURL,
         shortURL,

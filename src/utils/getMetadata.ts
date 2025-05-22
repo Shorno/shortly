@@ -1,33 +1,20 @@
 "use server"
-import * as cheerio from "cheerio";
-import {headers} from "next/headers";
+const API_BASE_URL = "https://tools.buzzstream.com/metaDataService?url="
+const FAVICON_FORMAT = "favicon.ico"
+
+interface Data {
+    title: string
+}
 
 export default async function GetMetadata(originalLink: string) {
-    const headersList = await headers()
-    const userAgent = headersList.get('user-agent') as string
-    const $ = await cheerio.fromURL(originalLink,
-        {
-            requestOptions: {
-                method: "GET",
-                headers: {
-                    'accept': 'text/html,application/xhtml+xml,application/xml',
-                    'User-Agent': userAgent
-                }
-            }
-        }
-    );
-    const title = $('head > title').first().text();
 
-    const iconLink = $('link[rel~="icon"]').first();
-    let favicon = iconLink.attr('href') || null;
+    const {origin} = new URL(originalLink)
 
-    if (favicon && favicon.startsWith('/')) {
-        const {origin} = new URL(originalLink);
-        favicon = origin + favicon;
-    }
-    if (!favicon) {
-        favicon = "https://cdn-icons-png.flaticon.com/128/3449/3449752.png";
-    }
+    const response = await fetch(`${API_BASE_URL}${originalLink}`)
+    const data: Data[] = await response.json();
+    const title = data[0]?.title ?? origin;
+    const favicon = `${origin}/${FAVICON_FORMAT}`;
+
 
     return {title, favicon}
 

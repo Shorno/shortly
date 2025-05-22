@@ -7,10 +7,9 @@ export default function LinkDisplay({originalURL, shortURL, siteTitle, siteFavic
         <div className={"flex md:gap-4"}>
             <div className={"flex mt-1"}>
                 <Image src={siteFavicon} alt={siteTitle} width={24} height={24}
-                       className={"rounded-full object-cover size-8 hidden md:flex"}/>
+                       className={"rounded-full object-cover  min-w-8 min-h-8 max-w-8 max-h-8  hidden md:flex"}/>
             </div>
             <div className={"flex flex-col gap-1"}>
-
                 <p className={"font-semibold"}>{siteTitle}</p>
                 <Link className={"font-semibold text-blue-500"} href={shortURL}
                       target={"_blank"}>{shortURL}
