@@ -8,6 +8,9 @@ export default function Navbar() {
             <div>
                 <Link href={"/"} className={"text-3xl font-semibold"}>Shortly</Link>
             </div>
+            <div>
+                <Link href={"/links"}>My Links</Link>
+            </div>
             <div className={"flex gap-4 justify-center items-center"}>
                 <ThemeToggle/>
                 <Button asChild>
