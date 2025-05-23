@@ -16,11 +16,11 @@ export default async function GenerateShortURL(originalURL: string) {
     const {title, favicon} = await GetMetadata(originalURL)
 
     const data = {
-        originalURL,
-        shortURL,
-        generatedID: randomID,
-        siteTitle: title,
-        siteFavicon: favicon
+        original_url: originalURL,
+        short_url: shortURL,
+        generated_id: randomID,
+        site_title: title,
+        site_favicon: favicon
     }
 
     try {

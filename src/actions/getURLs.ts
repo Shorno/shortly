@@ -4,11 +4,11 @@ import {db} from "@/db";
 
 export interface ShortURL {
     id: number;
-    generatedID: string;
-    originalURL: string;
-    shortURL: string;
-    siteFavicon: string,
-    siteTitle : string
+    generated_id: string;
+    original_url: string;
+    short_url: string;
+    site_favicon: string,
+    site_title : string
 }
 
 
