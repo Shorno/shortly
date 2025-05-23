@@ -228,7 +228,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                                             dataKey="visits"
                                             stroke="hsl(var(--chart-1))"
                                             strokeWidth={2}
-                                            dot={{fill: "hsl(var(--chart-1))", strokeWidth: 4, r: 2}}
+                                            dot={{fill: "hsl(var(--chart-1))", strokeWidth: 1, r: 2.5}}
                                         />
                                     </LineChart>
                                 </ResponsiveContainer>
