@@ -25,7 +25,7 @@ export default async function GenerateShortURL(originalURL: string) {
 
     try {
         await db.insert(links).values(data)
-        revalidatePath("/")
+        revalidatePath("/links")
         return {success: true}
 
     } catch (error: unknown) {
