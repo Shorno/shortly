@@ -22,7 +22,6 @@ export default function LinkCard({id, original_url, short_url, site_title, site_
                         <Separator className={"md:hidden"}/>
                         <LinkActions shortURL={short_url}/>
                     </div>
-
                 </CardContent>
             </Card>
         </>

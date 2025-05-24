@@ -11,7 +11,7 @@ export default function LinkDisplay({original_url, short_url, site_title, site_f
                 <Image src={site_favicon} alt={site_title} width={24} height={24}
                        className={"rounded-full object-cover  min-w-8 min-h-8 max-w-8 max-h-8  hidden md:flex"}/>
             </div>
-            <div className={"flex flex-col gap-1"}>
+            <div className={"flex flex-col gap-1 px-2"}>
                 <p className={"font-semibold"}>{site_title}</p>
                 <Link className={"font-semibold text-blue-500"} href={short_url}
                       target={"_blank"}>{short_url}

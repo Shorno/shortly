@@ -7,7 +7,6 @@ export default async function Links() {
 
     if (links.length === 0) return <NoLinksCard/>;
 
-    console.log(links)
     return (
         <div className={"flex flex-col gap-4 md:max-w-2xl"}>
             {

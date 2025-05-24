@@ -8,7 +8,7 @@ export default async function AnalyticsPage({params}: { params: Promise<{ genera
 
     return (
         <main
-            className="py-12 px-4">
+            className="py-12 px-2">
             <div className="w-full max-w-6xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Link Analytics</h1>
