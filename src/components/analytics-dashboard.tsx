@@ -1,6 +1,5 @@
 "use client"
 
-import {motion} from "framer-motion"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart"
 import {BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line} from "recharts"
@@ -9,31 +8,11 @@ import {useMemo} from "react"
 
 interface AnalyticsDashboardProps {
     visitCount: number
-    visitTimestamps: Array<{ visitedAt: Date }>
+    visitTimestamps: Array<{ visitedAt: string }>
     generatedId: string
 }
 
 export default function AnalyticsDashboard({visitCount, visitTimestamps, generatedId}: AnalyticsDashboardProps) {
-    const containerVariants = {
-        hidden: {opacity: 0},
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2,
-            },
-        },
-    }
-
-    const itemVariants = {
-        hidden: {y: 20, opacity: 0},
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {type: "spring", stiffness: 100},
-        },
-    }
-
     const analyticsData = useMemo(() => {
         const visits = visitTimestamps.map((v) => new Date(v.visitedAt))
 
@@ -101,10 +80,10 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
     }
 
     return (
-        <motion.div className="space-y-6" initial="hidden" animate="visible" variants={containerVariants}>
+        <div className="space-y-6">
             {/* Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="relative overflow-hidden bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30 border-purple-100 dark:border-purple-900">
                         <div
@@ -122,9 +101,9 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             </p>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-blue-100 dark:border-blue-900">
                         <div
@@ -143,9 +122,9 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             </p>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-green-100 dark:border-green-900">
                         <div
@@ -161,9 +140,9 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Days with activity</p>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="relative overflow-hidden bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 border-orange-100 dark:border-orange-900">
                         <div
@@ -180,11 +159,12 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Visits per day</p>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
             </div>
 
+            {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="bg-gradient-to-br from-purple-50/50 to-blue-50/50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-100 dark:border-purple-900">
                         <CardHeader>
@@ -197,7 +177,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                                 <ResponsiveContainer width="100%" height={200}>
                                     <BarChart data={analyticsData.dailyData}>
                                         <XAxis dataKey="date"/>
-                                        <YAxis/>
+                                        <YAxis allowDecimals={false}/>
                                         <ChartTooltip content={<ChartTooltipContent/>}/>
                                         <Bar dataKey="visits" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]}/>
                                     </BarChart>
@@ -205,9 +185,9 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             </ChartContainer>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                     <Card
                         className="bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-100 dark:border-blue-900">
                         <CardHeader>
@@ -235,11 +215,11 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             </ChartContainer>
                         </CardContent>
                     </Card>
-                </motion.div>
+                </div>
             </div>
 
             {/* Recent Activity */}
-            <motion.div variants={itemVariants}>
+            <div>
                 <Card
                     className="bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-100 dark:border-green-900">
                     <CardHeader>
@@ -255,18 +235,15 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                         <div className="space-y-3">
                             {analyticsData.recentActivity.length > 0 ? (
                                 analyticsData.recentActivity.map((activity, index) => (
-                                    <motion.div
+                                    <div
                                         key={index}
                                         className="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 rounded-lg border border-green-100 dark:border-green-800"
-                                        initial={{opacity: 0, x: -20}}
-                                        animate={{opacity: 1, x: 0}}
-                                        transition={{delay: index * 0.1}}
                                     >
                                         <div className="w-2 h-2 rounded-full bg-green-500"></div>
                                         <ExternalLink className="h-4 w-4 text-gray-400"/>
                                         <span
                                             className="text-sm text-gray-600 dark:text-gray-300">Link visited on {activity.time}</span>
-                                    </motion.div>
+                                    </div>
                                 ))
                             ) : (
                                 <p className="text-gray-500 dark:text-gray-400 text-center py-4">No recent activity</p>
@@ -274,9 +251,10 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                         </div>
                     </CardContent>
                 </Card>
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants}>
+            {/* Link Info */}
+            <div>
                 <Card
                     className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/50 dark:to-slate-950/50 border-gray-200 dark:border-gray-800">
                     <CardHeader>
@@ -294,7 +272,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                         </div>
                     </CardContent>
                 </Card>
-            </motion.div>
-        </motion.div>
+            </div>
+        </div>
     )
 }
