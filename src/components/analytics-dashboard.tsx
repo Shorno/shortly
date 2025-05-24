@@ -8,7 +8,7 @@ import {useMemo} from "react"
 
 interface AnalyticsDashboardProps {
     visitCount: number
-    visitTimestamps: Array<{ visitedAt: string }>
+    visitTimestamps: Array<{ visitedAt: Date }>
     generatedId: string
 }
 
