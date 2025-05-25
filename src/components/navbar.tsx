@@ -13,7 +13,7 @@ export default function Navbar() {
             <div>
                 <Link href={"/"} className={"text-3xl font-semibold"}>Shortly</Link>
             </div>
-            <Button variant={isActive ? "default" : "ghost"} className={"rounded-full"}>
+            <Button asChild variant={isActive ? "default" : "ghost"} className={"rounded-full"}>
                 <Link href={"/links"} className={isActive ? "font-semibold" : ""}>My Links</Link>
             </Button>
             <div className={"flex gap-4 justify-center items-center"}>
