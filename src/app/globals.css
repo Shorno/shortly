@@ -49,6 +49,7 @@
   --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 8px 10px -1px hsl(0 0% 0% / 0.17);
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
   --tracking-normal: 0.025em;
+  --char-bar: #729dfe;
 }
 
 .dark {
@@ -84,6 +85,8 @@
   --sidebar-accent-foreground: oklch(0.99 0 0);
   --sidebar-border: oklch(0.28 0 0);
   --sidebar-ring: oklch(0.80 0.18 151.71);
+  --char-bar: #3460cc;
+
 }
 
 @theme inline {

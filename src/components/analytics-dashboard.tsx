@@ -179,7 +179,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                                         <XAxis dataKey="date"/>
                                         <YAxis allowDecimals={false}/>
                                         <ChartTooltip content={<ChartTooltipContent/>}/>
-                                        <Bar dataKey="visits" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]}/>
+                                        <Bar dataKey="visits" fill="#2b7fff" radius={[4, 4, 0, 0]}/>
                                     </BarChart>
                                 </ResponsiveContainer>
                             </ChartContainer>
@@ -208,7 +208,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                                             dataKey="visits"
                                             stroke="hsl(var(--chart-1))"
                                             strokeWidth={2}
-                                            dot={{fill: "hsl(var(--chart-1))", strokeWidth: 1, r: 2.5}}
+                                            dot={{fill: "#2b7fff", strokeWidth: 1, r: 2.5}}
                                         />
                                     </LineChart>
                                 </ResponsiveContainer>
