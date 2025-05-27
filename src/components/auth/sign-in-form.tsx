@@ -36,7 +36,7 @@ export default function SignInForm() {
 
     const handleSubmit = async ({email, password}: SignInFormData) => {
         startTransition(async () => {
-            signIn.email({
+            await signIn.email({
                 email,
                 password,
                 fetchOptions: {
@@ -111,11 +111,7 @@ export default function SignInForm() {
                         </div>
 
                         <Button type="submit" className="w-full" disabled={isLoading}>
-                            {isLoading &&
-                                <p className={"flex"}><Loader2 className="mr-2 h-4 w-4 animate-spin"/> Signing In
-                                </p>
-                            }
-                            Sign in
+                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>} Sign in
                         </Button>
                     </form>
                 </Form>
