@@ -3,6 +3,7 @@ import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {ThemeToggle} from "@/components/theme-toogle";
 import {usePathname} from "next/navigation";
+import AuthUser from "@/components/AuthUser";
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -18,9 +19,7 @@ export default function Navbar() {
             </Button>
             <div className={"flex gap-4 justify-center items-center"}>
                 <ThemeToggle/>
-                <Button asChild>
-                    <Link href={"/login"}>Login</Link>
-                </Button>
+                <AuthUser/>
             </div>
         </nav>
     )

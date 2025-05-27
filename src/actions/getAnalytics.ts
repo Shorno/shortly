@@ -5,7 +5,6 @@ import {count, eq} from "drizzle-orm";
 import {analytics} from "@/db/schema";
 
 export default async function GetAnalytics(generatedId: string) {
-
     const visitData = await db.select({count: count(analytics)}).from(analytics).where(eq(analytics.linkGeneratedId, generatedId))
 
     const visitCount = visitData[0]?.count ?? 0;
