@@ -5,7 +5,16 @@ import {Separator} from "@/components/ui/separator";
 import {ShortURL} from "@/actions/getPublicURLs";
 
 
-export default function LinkCard({id, original_url, short_url, site_title, site_favicon, generated_id}: ShortURL) {
+export default function LinkCard({
+                                     id,
+                                     original_url,
+                                     short_url,
+                                     site_title,
+                                     site_favicon,
+                                     generated_id,
+                                     is_public,
+                                     user_id
+                                 }: ShortURL) {
     return (
         <>
             <Card className={"border-none rounded-sm"}>
@@ -18,6 +27,8 @@ export default function LinkCard({id, original_url, short_url, site_title, site_
                             short_url={short_url}
                             site_favicon={site_favicon}
                             site_title={site_title}
+                            user_id={user_id}
+                            is_public={is_public}
                         />
                         <Separator className={"md:hidden"}/>
                         <LinkActions shortURL={short_url}/>
