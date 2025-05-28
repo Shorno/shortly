@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import {ShortURL} from "@/actions/getURLs";
 import {Separator} from "@/components/ui/separator";
 import {ArrowRight} from "lucide-react";
+import {ShortURL} from "@/actions/getPublicURLs";
 
 export default function LinkDisplay({original_url, short_url, site_title, site_favicon, generated_id}: ShortURL) {
     return (

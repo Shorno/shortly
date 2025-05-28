@@ -10,7 +10,6 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
 import {Eye, EyeOff, Loader2} from "lucide-react"
 import Link from "next/link"
-import {useRouter} from "next/navigation"
 import {signIn} from "@/lib/auth-client";
 import {toast} from "sonner";
 
@@ -24,7 +23,6 @@ type SignInFormData = z.infer<typeof signInSchema>
 export default function SignInForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, startTransition] = useTransition()
-    const router = useRouter()
 
     const form = useForm<SignInFormData>({
         resolver: zodResolver(signInSchema),
@@ -44,9 +42,8 @@ export default function SignInForm() {
                         toast.error(ctx.error.message)
                         console.log(ctx)
                     },
-                    onSuccess: (ctx) => {
-                        router.push("/links")
-                        console.log(ctx)
+                    onSuccess: () => {
+                        toast.success("Login successful")
                     }
                 }
 

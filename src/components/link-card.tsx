@@ -1,8 +1,8 @@
 import {Card, CardContent} from "@/components/ui/card";
-import {ShortURL} from "@/actions/getURLs";
 import LinkActions from "@/components/link-actions";
 import LinkDisplay from "@/components/link-display";
 import {Separator} from "@/components/ui/separator";
+import {ShortURL} from "@/actions/getPublicURLs";
 
 
 export default function LinkCard({id, original_url, short_url, site_title, site_favicon, generated_id}: ShortURL) {
