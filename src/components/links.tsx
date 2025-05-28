@@ -1,9 +1,12 @@
-import GetURLs from "@/actions/getURLs";
 import LinkCard from "@/components/link-card";
 import NoLinksCard from "@/components/no-links-card";
+import {ShortURL} from "@/actions/getPublicURLs";
 
-export default async function Links() {
-    const links = await GetURLs();
+interface LinksProps {
+    links: ShortURL[]
+}
+
+export default async function Links({links}: LinksProps) {
 
     if (links.length === 0) return <NoLinksCard/>;
 
@@ -19,6 +22,8 @@ export default async function Links() {
                         short_url={link.short_url}
                         site_favicon={link.site_favicon}
                         site_title={link.site_title}
+                        is_public={link.is_public}
+                        user_id={link.user_id}
                     />
                 ))
             }

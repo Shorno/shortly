@@ -1,14 +1,10 @@
 import {Suspense} from "react";
 import LinksLoading from "@/components/links-loading";
 import Links from "@/components/links";
-import GetPublicURLs from "@/actions/getPublicURLs";
+import {GetUserURLs} from "@/actions/getUserURLs";
 
-export const dynamic = "force-dynamic"
-
-
-export default async function LinksPage() {
-    const links = await GetPublicURLs();
-
+export default async function MyLinksPage() {
+    const links = await GetUserURLs();
     return (
         <div className={"flex justify-center pt-10"}>
             <Suspense fallback={<LinksLoading/>}

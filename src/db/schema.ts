@@ -1,4 +1,5 @@
-import {date, integer, pgTable, timestamp, varchar} from "drizzle-orm/pg-core";
+import {boolean, date, integer, pgTable, text, timestamp, varchar} from "drizzle-orm/pg-core";
+import {user} from "@/db/auth-schema";
 
 export const links = pgTable("links", {
     id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
@@ -7,6 +8,8 @@ export const links = pgTable("links", {
     site_favicon: varchar("site_favicon", {length: 255}).notNull(),
     short_url: varchar("short_url", {length: 255}).notNull().unique(),
     generated_id: varchar("generated_id", {length: 50}).notNull().unique(),
+    user_id: text("user_id").references(() => user.id, {onDelete: 'set null'}),
+    is_public: boolean("is_public").notNull().default(true),
 })
 
 

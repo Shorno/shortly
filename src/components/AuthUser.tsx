@@ -30,7 +30,6 @@ export default function AuthUser() {
         )
     }
 
-    // Authenticated user
     const user = data?.user
     const userInitial = user.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "U"
 
