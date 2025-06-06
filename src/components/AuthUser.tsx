@@ -14,15 +14,22 @@ import {
 import {Skeleton} from "@/components/ui/skeleton"
 import Link from "next/link"
 import {LogOut, User} from "lucide-react"
+import {useRouter} from "next/navigation";
 
 export default function AuthUser() {
     const {data, isPending} = useSession()
+    const router = useRouter();
 
     if (isPending) {
         return <Skeleton className="h-10 w-10 rounded-full"/>
     }
 
     if (!data?.user) return
+
+    const handleLogout = async () => {
+        await signOut();
+        router.push("/")
+    }
 
     const user = data?.user
     const userInitial = user.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "U"
@@ -52,7 +59,7 @@ export default function AuthUser() {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator/>
-                <DropdownMenuItem onClick={async () => await signOut()} className="cursor-pointer">
+                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4"/>
                     <span>Log out</span>
                 </DropdownMenuItem>

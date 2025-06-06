@@ -12,6 +12,7 @@ import {Eye, EyeOff, Loader2} from "lucide-react"
 import Link from "next/link"
 import {signIn} from "@/lib/auth-client";
 import {toast} from "sonner";
+import {useRouter} from "next/navigation";
 
 const signInSchema = z.object({
     email: z.string().email("Please enter a valid email address"),
@@ -23,6 +24,7 @@ type SignInFormData = z.infer<typeof signInSchema>
 export default function SignInForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, startTransition] = useTransition()
+    const router = useRouter()
 
     const form = useForm<SignInFormData>({
         resolver: zodResolver(signInSchema),
@@ -44,6 +46,7 @@ export default function SignInForm() {
                     },
                     onSuccess: () => {
                         toast.success("Login successful")
+                        router.push("/dashboard")
                     }
                 }
 
