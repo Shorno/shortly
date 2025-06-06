@@ -1,10 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import {Separator} from "@/components/ui/separator";
 import {ArrowRight} from "lucide-react";
 import {ShortURL} from "@/actions/getPublicURLs";
 
-export default function LinkDisplay({original_url, short_url, site_title, site_favicon, generated_id}: ShortURL) {
+export default function LinkDisplay({
+                                        original_url,
+                                        short_url,
+                                        site_title,
+                                        site_favicon,
+                                        generated_id,
+                                        is_public
+                                    }: ShortURL) {
     return (
         <div className={"flex md:gap-4"}>
             <div className={"flex mt-1"}>
@@ -21,9 +27,14 @@ export default function LinkDisplay({original_url, short_url, site_title, site_f
                           target={"_blank"}>{original_url}
                     </Link>
                 </div>
-                <Separator className={"mt-2"}/>
                 <div>
-                    <Link className={"text-blue-500 flex"} href={`/links/${generated_id}`}>View Analytics <ArrowRight/></Link>
+                    {
+                        !is_public
+                            ? <Link className={"text-blue-500 flex mt-4"} href={`/links/${generated_id}`}>View
+                                Analytics <ArrowRight/></Link>
+                            :
+                            null
+                    }
                 </div>
             </div>
         </div>

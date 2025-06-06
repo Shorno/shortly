@@ -22,13 +22,7 @@ export default function AuthUser() {
         return <Skeleton className="h-10 w-10 rounded-full"/>
     }
 
-    if (!data?.user) {
-        return (
-            <Button asChild>
-                <Link href="/signin">Login</Link>
-            </Button>
-        )
-    }
+    if (!data?.user) return
 
     const user = data?.user
     const userInitial = user.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "U"

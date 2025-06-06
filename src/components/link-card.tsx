@@ -20,16 +20,18 @@ export default function LinkCard({
             <Card className={"border-none rounded-sm"}>
                 <CardContent>
                     <div className={"flex flex-col md:flex-row gap-2 justify-between"}>
-                        <LinkDisplay
-                            id={id}
-                            generated_id={generated_id}
-                            original_url={original_url}
-                            short_url={short_url}
-                            site_favicon={site_favicon}
-                            site_title={site_title}
-                            user_id={user_id}
-                            is_public={is_public}
-                        />
+                      <div>
+                          <LinkDisplay
+                              id={id}
+                              generated_id={generated_id}
+                              original_url={original_url}
+                              short_url={short_url}
+                              site_favicon={site_favicon}
+                              site_title={site_title}
+                              user_id={user_id}
+                              is_public={is_public}
+                          />
+                      </div>
                         <Separator className={"md:hidden"}/>
                         <LinkActions shortURL={short_url}/>
                     </div>
