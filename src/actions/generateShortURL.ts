@@ -14,7 +14,7 @@ export default async function GenerateShortURL(originalURL: string) {
     const shortURL = `${BASE_URL}${randomID}`
 
     const {title, favicon} = await GetMetadata(originalURL)
-    console.log(title, favicon)
+    console.log("title generate short url fun", title)
 
     const data = {
         original_url: originalURL,
@@ -33,6 +33,7 @@ export default async function GenerateShortURL(originalURL: string) {
 
     } catch (error: unknown) {
         if (error instanceof Error) {
+            console.log(error)
             return {success: false, error}
         }
     }

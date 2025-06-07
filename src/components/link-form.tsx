@@ -33,7 +33,7 @@ export default function LinkForm() {
     const onSubmit = async (values: LinkFormValues) => {
         startTransition(async () => {
             const response = await GenerateShortURL(values.url)
-            console.log(response)
+            console.log("response", response)
             if (response?.success) {
                 toast.success("Link Generated", {
                     action: {

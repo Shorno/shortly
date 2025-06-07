@@ -28,7 +28,7 @@ export async function GET(request: Request) {
             return NextResponse.json({title: hostname});
         }
 
-        console.log(title)
+        console.log("route handler", title)
         return NextResponse.json({title});
 
     } catch (error: unknown) {
