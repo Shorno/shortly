@@ -28,11 +28,13 @@ export async function GET(request: Request) {
         }
         return NextResponse.json({title});
 
-    } catch (error: any) {
-        console.error(error);
-        return NextResponse.json(
-            {error: "Failed to fetch title", details: error.message},
-            {status: 500}
-        );
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json(
+                {error: "Failed to fetch title", details: error.message},
+                {status: 500}
+            );
+        }
+
     }
 }
