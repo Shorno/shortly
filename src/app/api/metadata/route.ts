@@ -2,6 +2,7 @@ import {NextResponse} from "next/server";
 import puppeteer from "puppeteer";
 
 
+
 export async function GET(request: Request) {
     const {searchParams} = new URL(request.url);
     const url = searchParams.get("url");
@@ -26,6 +27,8 @@ export async function GET(request: Request) {
         if (!title || title === "" || title === "Just a moment...") {
             return NextResponse.json({title: hostname});
         }
+
+        console.log(title)
         return NextResponse.json({title});
 
     } catch (error: unknown) {
