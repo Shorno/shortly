@@ -14,7 +14,6 @@ export default async function GenerateShortURL(originalURL: string) {
     const shortURL = `${BASE_URL}${randomID}`
 
     const {title, favicon} = await GetMetadata(originalURL)
-    console.log("title generate short url fun", title)
 
     const data = {
         original_url: originalURL,
@@ -23,8 +22,6 @@ export default async function GenerateShortURL(originalURL: string) {
         site_title: title,
         site_favicon: favicon
     }
-
-    console.log("before db")
 
     try {
         await db.insert(links).values(data)
