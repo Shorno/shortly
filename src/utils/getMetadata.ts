@@ -1,9 +1,8 @@
 "use server"
-import getPageTitle from "@/utils/getPageTitle";
-export default async function GetMetadata(originalLink: string) {
-    const {hostname} = new URL(originalLink)
+export default async function getMetadata(originalLink: string) {
+    const hostname = new URL(originalLink).hostname;
     const favicon = `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
-    const title = await getPageTitle(originalLink)
-    return {title, favicon}
-
+    const response = await fetch(`${process.env.BASE_URL as string}/api/metadata?url=${originalLink}`);
+    const { title } = await response.json();
+    return { title, favicon };
 }
