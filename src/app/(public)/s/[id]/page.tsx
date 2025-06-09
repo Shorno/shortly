@@ -1,4 +1,4 @@
-import GetOriginalURL from "@/actions/getOriginalURL";
+import GetOriginalURL from "@/utils/getOriginalURL";
 import NotFound from "next/dist/client/components/not-found-error";
 import {redirect} from "next/navigation";
 import {db} from "@/db";

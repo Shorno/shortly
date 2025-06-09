@@ -11,7 +11,7 @@ export default async function GenerateShortURL(originalURL: string) {
 
     const randomID = GenerateRandomID(6)
     const BASE_URL = process.env.BASE_URL as string;
-    const shortURL = `${BASE_URL}${randomID}`
+    const shortURL = `${BASE_URL}/s/${randomID}`
 
     const {title, favicon} = await GetMetadata(originalURL)
 

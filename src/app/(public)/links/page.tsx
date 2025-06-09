@@ -1,9 +1,7 @@
 import {Suspense} from "react";
-import LinksLoading from "@/components/links-loading";
-import Links from "@/components/links";
-import GetPublicURLs from "@/actions/getPublicURLs";
-
-export const dynamic = "force-dynamic"
+import LinksLoading from "@/components/link/links-loading";
+import Links from "@/components/link/links";
+import GetPublicURLs from "@/data/getPublicURLs";
 
 
 export default async function LinksPage() {

@@ -1,4 +1,4 @@
-import LinkForm from "@/components/link-form";
+import LinkForm from "@/components/link/link-form";
 
 export default async function Home() {
     return (

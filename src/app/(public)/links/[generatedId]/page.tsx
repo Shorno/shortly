@@ -1,5 +1,5 @@
-import GetAnalytics from "@/actions/getAnalytics"
-import AnalyticsDashboard from "@/components/analytics-dashboard"
+import GetAnalytics from "@/data/getAnalytics"
+import AnalyticsDashboard from "@/components/analytics/analytics-dashboard"
 
 export default async function AnalyticsPage({params}: { params: Promise<{ generatedId: string }> }) {
     const {generatedId} = await params

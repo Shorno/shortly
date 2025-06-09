@@ -7,12 +7,12 @@ import {z} from "zod"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {Button} from "@/components/ui/button"
-import GenerateShortURL from "@/actions/generateShortURL"
 import {useTransition} from "react"
 import {motion} from "motion/react"
 import {LinkIcon, ArrowRight, Loader2} from "lucide-react"
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
+import GeneratePrivateURL from "@/actions/generatePrivateURL";
 
 const formSchema = z.object({
     url: z.string().min(1, {message: "Cannot generate empty link"}).url({message: "The input is not valid URL"}),
@@ -20,7 +20,7 @@ const formSchema = z.object({
 
 type LinkFormValues = z.infer<typeof formSchema>
 
-export default function LinkForm() {
+export default function UserLinkForm() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition()
 
@@ -32,13 +32,12 @@ export default function LinkForm() {
     })
     const onSubmit = async (values: LinkFormValues) => {
         startTransition(async () => {
-            const response = await GenerateShortURL(values.url)
-            console.log("response", response)
+            const response = await GeneratePrivateURL(values.url)
             if (response?.success) {
                 toast.success("Link Generated", {
                     action: {
                         label: "View Links",
-                        onClick: () => router.push("/links")
+                        onClick: () => router.push("/dashboard/my-links")
                     }
                 })
                 form.reset();

@@ -1,4 +1,4 @@
-import AnalyticsLoading from "@/components/analytics-loading"
+import AnalyticsLoading from "@/components/analytics/analytics-loading"
 
 export default function Loading() {
     return (

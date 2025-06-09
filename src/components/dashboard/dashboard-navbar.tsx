@@ -2,7 +2,7 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import AuthUser from "@/components/AuthUser";
+import AuthUser from "@/components/auth/AuthUser";
 
 
 export default function DashboardNavbar() {
