@@ -1,7 +1,7 @@
 import {Suspense} from "react";
-import LinksLoading from "@/components/links-loading";
-import Links from "@/components/links";
-import {GetUserURLs} from "@/actions/getUserURLs";
+import LinksLoading from "@/components/link/links-loading";
+import Links from "@/components/link/links";
+import {GetUserURLs} from "@/data/getUserURLs";
 import UnauthorizedCard from "@/components/un-authorized";
 
 export default async function MyLinksPage() {

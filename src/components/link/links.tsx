@@ -1,6 +1,6 @@
-import LinkCard from "@/components/link-card";
-import NoLinksCard from "@/components/no-links-card";
-import {ShortURL} from "@/actions/getPublicURLs";
+import LinkCard from "@/components/link/link-card";
+import NoLinksCard from "@/components/link/no-links-card";
+import {ShortURL} from "@/data/getPublicURLs";
 
 interface LinksProps {
     links: ShortURL[] | null

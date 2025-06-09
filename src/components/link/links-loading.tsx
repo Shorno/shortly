@@ -1,4 +1,4 @@
-import LinkCardSkeleton from "@/components/link-card-skeleton";
+import LinkCardSkeleton from "@/components/link/link-card-skeleton";
 
 export default function LinksLoading() {
     return (
