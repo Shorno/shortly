@@ -13,6 +13,12 @@ export const auth = betterAuth({
             verification: schema.verification
         }
     }),
+    session: {
+        cookieCache: {
+            enabled: true,
+            maxAge: 60 * 5,
+        }
+    },
     emailAndPassword: {
         enabled: true
     }

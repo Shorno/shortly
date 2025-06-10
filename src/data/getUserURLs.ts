@@ -5,10 +5,13 @@ import {getCachedUserLinks} from "@/data/getCachedUserLinks";
 export async function GetUserURLs() {
     try {
 
+        console.time("GetUser");
         const user = await GetUser();
+        console.timeEnd("GetUser");
 
+        console.time("getCachedUserLinks");
         const userLinks = await getCachedUserLinks(user.id);
-
+        console.timeEnd("getCachedUserLinks");
         return {
             success: true,
             status: 200,
