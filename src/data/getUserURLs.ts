@@ -1,23 +1,18 @@
 import {GetUser} from "@/data/getUser";
-import {db} from "@/db";
-import {eq} from "drizzle-orm";
-import {links} from "@/db/schema";
+import {getCachedUserLinks} from "@/data/getCachedUserLinks";
 
-
-const getCachedUserLinks = async (userId: string) => {
-    "use cache"
-    console.log("Fetching cached user links from the database...");
-
-    return db.query.links.findMany({
-        where: eq(links.user_id, userId),
-    });
-}
 
 export async function GetUserURLs() {
     try {
+        const authStart = Date.now();
         const user = await GetUser();
+        const authEnd = Date.now();
+        console.log(`👤 Auth took ${authEnd - authStart}ms`);
 
+        const cacheStart = Date.now();
         const userLinks = await getCachedUserLinks(user.id);
+        const cacheEnd = Date.now();
+        console.log(`💾 Cache lookup took ${cacheEnd - cacheStart}ms`);
 
         return {
             success: true,
@@ -26,6 +21,7 @@ export async function GetUserURLs() {
             data: userLinks
         }
     } catch (error) {
+        console.error("❌ GetUserURLs error:", error);
         return {
             success: false,
             status: 401,
