@@ -4,6 +4,10 @@ import Links from "@/components/link/links";
 import {GetUserURLs} from "@/data/getUserURLs";
 import UnauthorizedCard from "@/components/un-authorized";
 
+export const metadata = {
+    title: "Links"
+}
+
 export default async function MyLinksPage() {
     const response = await GetUserURLs();
 

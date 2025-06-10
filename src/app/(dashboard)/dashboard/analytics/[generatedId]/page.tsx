@@ -1,6 +1,11 @@
 import GetAnalytics from "@/data/getAnalytics"
 import AnalyticsDashboard from "@/components/analytics/analytics-dashboard"
 
+export const metadata = {
+    title: "Analytics",
+    description: "Detailed insights and performance metrics for your shortened URL"
+}
+
 export default async function AnalyticsPage({params}: { params: Promise<{ generatedId: string }> }) {
     const {generatedId} = await params
 

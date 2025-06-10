@@ -7,7 +7,7 @@ import AuthUser from "@/components/auth/AuthUser";
 
 export default function DashboardNavbar() {
     const pathname = usePathname()
-    const isMyLinksActive = pathname === "/my-links";
+    const isMyLinksActive = pathname === "/links";
 
     return (
         <nav className={"mx-auto container flex items-center justify-between py-4 px-4 lg:px-0"}>
@@ -17,7 +17,7 @@ export default function DashboardNavbar() {
             <div className={"flex gap-4"}>
                 <Button asChild variant={isMyLinksActive ? "default" : "ghost"}
                         className={`rounded-full ${isMyLinksActive ? null : "underline"}`}>
-                    <Link href={"/dashboard/my-links"} className={isMyLinksActive ? "font-semibold" : ""}>My
+                    <Link href={"/dashboard/links"} className={isMyLinksActive ? "font-semibold" : ""}>My
                         Links</Link>
                 </Button>
             </div>
