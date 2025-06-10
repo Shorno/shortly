@@ -2,34 +2,22 @@ import {GetUser} from "@/data/getUser";
 import {db} from "@/db";
 import {eq} from "drizzle-orm";
 import {links} from "@/db/schema";
-import {unstable_cache} from "next/cache";
 
 
-const getCachedUserLinks = (userId: string) => unstable_cache(
-    async () => {
-        console.log('Fetching links from database for user:', userId);
+const getCachedUserLinks = async (userId: string) => {
+    "use cache"
+    console.log("Fetching cached user links from the database...");
 
-        return db.query.links.findMany({
-            where: eq(links.user_id, userId),
-        });
-    },
-    [`user-links-${userId}`],
-    {
-        tags: [`user-links`, `user-${userId}`],
-        revalidate: 300,
-    }
-);
+    return db.query.links.findMany({
+        where: eq(links.user_id, userId),
+    });
+}
 
 export async function GetUserURLs() {
     try {
         const user = await GetUser();
 
-        const userLinks = await getCachedUserLinks(user.id)();
-
-
-        // const userLinks = await db.query.links.findMany({
-        //     where: eq(links.user_id, user.id),
-        // });
+        const userLinks = await getCachedUserLinks(user.id);
 
         return {
             success: true,
