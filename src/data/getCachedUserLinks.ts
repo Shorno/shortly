@@ -5,7 +5,7 @@ import {links} from "@/db/schema";
 
 export async function getCachedUserLinks(userId: string) {
     "use cache"
-    return db.query.links.findMany({
+    return await db.query.links.findMany({
         where: eq(links.user_id, userId),
-    });
+    })
 }
