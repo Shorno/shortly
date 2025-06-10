@@ -7,9 +7,7 @@ interface LinksProps {
 }
 
 export default async function Links({links}: LinksProps) {
-
     if (links?.length === 0) return <NoLinksCard/>;
-
     return (
         <div className={"flex flex-col gap-4 md:max-w-2xl"}>
             {

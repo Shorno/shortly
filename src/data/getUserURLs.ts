@@ -4,6 +4,7 @@ import {getCachedUserLinks} from "@/data/getCachedUserLinks";
 
 export async function GetUserURLs() {
     try {
+
         const authStart = Date.now();
         const user = await GetUser();
         const authEnd = Date.now();

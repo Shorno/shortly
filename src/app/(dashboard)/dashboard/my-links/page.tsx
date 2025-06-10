@@ -11,8 +11,8 @@ export default async function MyLinksPage() {
 
     return (
         <div className={"flex justify-center pt-10"}>
-            <Suspense fallback={<LinksLoading/>}
-            >
+
+            <Suspense fallback={<LinksLoading/>}>
                 <Links links={response.data}/>
             </Suspense>
         </div>
