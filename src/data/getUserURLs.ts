@@ -36,12 +36,12 @@ export async function GetUserURLs() {
         );
 
 
-        //     return {
-        //         success: true,
-        //         status: 200,
-        //         message: "Links retrieved successfully",
-        //         data: userLinks
-        //     }
+            return {
+                success: true,
+                status: 200,
+                message: "Links retrieved successfully",
+                data: dbLinks
+            }
     } catch (error) {
         console.error("❌ GetUserURLs error:", error);
         return {
