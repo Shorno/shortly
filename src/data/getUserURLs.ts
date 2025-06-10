@@ -5,15 +5,9 @@ import {getCachedUserLinks} from "@/data/getCachedUserLinks";
 export async function GetUserURLs() {
     try {
 
-        const authStart = Date.now();
         const user = await GetUser();
-        const authEnd = Date.now();
-        console.log(`👤 Auth took ${authEnd - authStart}ms`);
 
-        const cacheStart = Date.now();
         const userLinks = await getCachedUserLinks(user.id);
-        const cacheEnd = Date.now();
-        console.log(`💾 Cache lookup took ${cacheEnd - cacheStart}ms`);
 
         return {
             success: true,

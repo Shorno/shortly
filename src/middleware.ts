@@ -1,7 +1,4 @@
 import {NextRequest, NextResponse} from "next/server";
-import {auth} from "@/lib/auth";
-import {headers} from "next/headers";
-
 const protectedRoutes = ['/dashboard']
 const publicRoutes = ['/links', '/s',]
 const authRoutes = ['/login', '/signup', '/forgot-password', '/reset-password']
@@ -9,16 +6,15 @@ const authRoutes = ['/login', '/signup', '/forgot-password', '/reset-password']
 export default async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
 
+    const sessionToken = req.cookies.get("better-auth.session_token");
+
     const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route));
     const isPublicRoute = publicRoutes.some(route => path.startsWith(route));
     const isAuthRoute = authRoutes.some(route => path.startsWith(route));
 
-    const session = await auth.api.getSession({
-        headers: await headers()
-    });
 
     // If user is authenticated and trying to access auth routes, redirect to dashboard
-    if (session?.user && isAuthRoute) {
+    if (sessionToken && isAuthRoute) {
         return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
     }
 
@@ -28,17 +24,17 @@ export default async function middleware(req: NextRequest) {
     }
 
     // Allow auth routes for non-authenticated users
-    if (isAuthRoute && !session?.user) {
+    if (isAuthRoute && !sessionToken) {
         return NextResponse.next();
     }
 
     // Redirect to /login if the user is not authenticated for protected routes
-    if (isProtectedRoute && !session?.user) {
+    if (isProtectedRoute && !sessionToken) {
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
 
     // If user is authenticated but accessing unknown routes, redirect to dashboard
-    if (session?.user && !isProtectedRoute && !isPublicRoute && !isAuthRoute) {
+    if (sessionToken && !isProtectedRoute && !isPublicRoute && !isAuthRoute) {
         return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
     }
 
