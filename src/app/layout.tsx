@@ -1,4 +1,3 @@
-import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import {ThemeProvider} from "@/components/theme-provider";
@@ -13,11 +12,6 @@ const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
     subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-    title: "Free URL Shortener",
-    description: "Created By Shorno",
-};
 
 export default function RootLayout({
                                        children,

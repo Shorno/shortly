@@ -3,7 +3,9 @@ import LinksLoading from "@/components/link/links-loading";
 import Links from "@/components/link/links";
 import GetPublicURLs from "@/data/getPublicURLs";
 
-
+export const metadata = {
+    title: "Links"
+}
 export default async function LinksPage() {
     const links = await GetPublicURLs();
 
