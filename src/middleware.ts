@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
+
 const protectedRoutes = ['/dashboard']
 const publicRoutes = ['/links', '/s',]
 const authRoutes = ['/login', '/signup', '/forgot-password', '/reset-password']
@@ -6,7 +7,7 @@ const authRoutes = ['/login', '/signup', '/forgot-password', '/reset-password']
 export default async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
 
-    const sessionToken = req.cookies.get("better-auth.session_token");
+    const sessionToken = req.cookies.get("__Secure-better-auth.session_token") ?? req.cookies.get("better-auth.session_token");
 
     const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route));
     const isPublicRoute = publicRoutes.some(route => path.startsWith(route));
