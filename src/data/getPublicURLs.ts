@@ -17,7 +17,6 @@ export interface ShortURL {
 
 export default async function GetPublicURLs(): Promise<ShortURL[]> {
     "use cache"
-    console.log("Fetching public URLs from the database...");
     return db.query.links.findMany({
         where: eq(links.is_public, true)
     });
