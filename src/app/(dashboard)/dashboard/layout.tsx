@@ -14,9 +14,11 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <>
             <DashboardNavbar/>
-            {children}
-        </div>
+            <div className={""}>
+                {children}
+            </div>
+        </>
     )
 }

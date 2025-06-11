@@ -4,7 +4,7 @@ import {eq} from "drizzle-orm";
 import {links} from "@/db/schema";
 
 export async function getCachedUserLinks(userId: string) {
-    "use cache"
+    // "use cache"
     return await db.query.links.findMany({
         where: eq(links.user_id, userId),
     })

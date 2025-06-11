@@ -1,10 +1,10 @@
 "use server"
 import GenerateRandomID from "@/utils/generateRandomID";
-import {revalidateTag} from "next/cache";
 import {db} from "@/db";
 import {links} from "@/db/schema";
 import GetMetadata from "@/utils/getMetadata";
 import {GetUser} from "@/data/getUser";
+import redis from "@/lib/redis";
 
 export default async function GeneratePrivateURL(originalURL: string) {
     if (!originalURL) {
@@ -36,9 +36,13 @@ export default async function GeneratePrivateURL(originalURL: string) {
         };
 
         await db.insert(links).values(data);
+        //for local cache revalidation
 
-        revalidateTag(`user-${user.id}`);
-        revalidateTag(`user-links`);
+        // revalidateTag(`user-${user.id}`);
+        // revalidateTag(`user-links`);
+
+        //for redis cache revalidation
+        await redis.del(`user-links:${user.id}`);
 
         return {
             success: true,

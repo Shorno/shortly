@@ -8,7 +8,7 @@ export default function Navbar() {
     const isPublicLinksActive = pathname === "/links";
 
     return (
-        <nav className={"mx-auto container flex items-center justify-between py-4"}>
+        <nav className={"mx-auto container flex items-center justify-between py-4 px-4 lg:px-0"}>
             <div>
                 <Link href={"/"} className={"text-xl lg:text-3xl font-semibold"}>Shortly</Link>
             </div>

@@ -11,9 +11,6 @@ export async function GetUserURLs() {
         const user = await GetUser();
         console.timeEnd("GetUser");
 
-        // console.time("getCachedUserLinks");
-        // console.timeEnd("getCachedUserLinks");
-
         const redisLinks = await getLinksFromRedis(user.id);
 
         if (redisLinks) {
@@ -36,12 +33,12 @@ export async function GetUserURLs() {
         );
 
 
-            return {
-                success: true,
-                status: 200,
-                message: "Links retrieved successfully",
-                data: dbLinks
-            }
+        return {
+            success: true,
+            status: 200,
+            message: "Links retrieved successfully",
+            data: dbLinks
+        }
     } catch (error) {
         console.error("❌ GetUserURLs error:", error);
         return {

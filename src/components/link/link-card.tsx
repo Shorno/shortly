@@ -17,9 +17,9 @@ export default function LinkCard({
                                  }: ShortURL) {
     return (
         <>
-            <Card className={"border-none rounded-sm"}>
+            <Card className={"border-none rounded-sm mx-4 md:mx-0"}>
                 <CardContent>
-                    <div className={"flex flex-col md:flex-row gap-2 justify-between"}>
+                    <div className={"flex flex-col md:flex-row gap-2 justify-between "}>
                       <div>
                           <LinkDisplay
                               id={id}
