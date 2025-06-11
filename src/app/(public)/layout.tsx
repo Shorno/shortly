@@ -15,9 +15,11 @@ export default function PublicLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <>
             <Navbar/>
-            {children}
-        </div>
+            <div className={"bg-[#020013] min-h-screen"}>
+                {children}
+            </div>
+        </>
     )
 }
