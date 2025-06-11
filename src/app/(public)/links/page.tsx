@@ -1,20 +1,37 @@
-import {Suspense} from "react";
-import LinksLoading from "@/components/link/links-loading";
-import Links from "@/components/link/links";
-import GetPublicURLs from "@/data/getPublicURLs";
+import {Suspense} from "react"
+import LinksLoading from "@/components/link/links-loading"
+import Links from "@/components/link/links"
+import GetPublicURLs from "@/data/getPublicURLs"
+import LinksPagination from "@/components/LinksPagination"
 
 export const metadata = {
-    title: "Links"
+    title: "Links",
 }
-export default async function LinksPage() {
-    const links = await GetPublicURLs();
+
+export default async function LinksPage({
+                                            searchParams,
+                                        }: {
+    searchParams: Promise<{ page?: string | undefined }>
+}) {
+    const params = await searchParams
+    const currentPage = Number(params.page) || 1
+    const pageSize = 4
+
+    // Get paginated data and total count
+    const {data: paginatedLinks, totalCount} = await GetPublicURLs({
+        page: currentPage,
+        pageSize: pageSize,
+    })
+
+    const totalPages = Math.ceil(totalCount / pageSize)
 
     return (
-        <div className={"flex justify-center pt-10"}>
-            <Suspense fallback={<LinksLoading/>}
-            >
-                <Links links={links}/>
+        <div className={"flex justify-center flex-col gap-10 items-center mx-auto pt-32"}>
+            <Suspense fallback={<LinksLoading/>}>
+                <Links links={paginatedLinks}/>
             </Suspense>
+            <LinksPagination currentPage={currentPage} totalPages={totalPages} totalItems={totalCount}
+                             pageSize={pageSize}/>
         </div>
     )
 }

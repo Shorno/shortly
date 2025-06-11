@@ -7,11 +7,15 @@ import redis from "@/lib/redis";
 export async function GetUserURLs() {
     try {
 
-        console.time("GetUser");
+        console.time("auth-time");
         const user = await GetUser();
-        console.timeEnd("GetUser");
+        console.timeEnd("auth-time");
 
+
+        console.time("®️ redis-cache-time")
         const redisLinks = await getLinksFromRedis(user.id);
+        console.timeEnd("®️ redis-cache-time")
+
 
         if (redisLinks) {
             console.log("🟢 Returning from Redis cache");
