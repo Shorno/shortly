@@ -1,8 +1,7 @@
 "use client"
-
-import {useRouter, useSearchParams} from 'next/navigation'
 import {ChevronLeft, ChevronRight} from 'lucide-react'
 import {useTransition} from "react";
+import {useQueryState, parseAsInteger} from "nuqs";
 
 interface LinksPaginationProps {
     currentPage: number
@@ -17,59 +16,32 @@ export default function LinksPagination({
                                             totalItems,
                                             pageSize
                                         }: LinksPaginationProps) {
-    const router = useRouter()
-    const [isPending, startTransition] = useTransition()
-    const searchParams = useSearchParams()
+    const [, startTransition] = useTransition()
+    const [page, setPage] = useQueryState("page",
+        parseAsInteger.withDefault(1).withOptions({shallow: false, history: 'replace', startTransition})
+    )
 
-    const navigateToPage = (page: number) => {
-        startTransition(() => {
-            const params = new URLSearchParams(searchParams.toString());
-            if (page === 1) {
-                params.set('page', '1');
-            } else {
-                params.set('page', page.toString());
-            }
 
-            const queryString = params.toString();
-            const url = queryString ? `?${queryString}` : '';
-            router.push(url);
-        })
-    };
+    const navigateToPage = (page: number) => setPage(Math.max(1, Math.min(totalPages, page)))
+
+    if (totalPages <= 1) return null
 
     const startItem = (currentPage - 1) * pageSize + 1
     const endItem = Math.min(currentPage * pageSize, totalItems)
 
-    if (totalPages <= 1) return null
-
-    const renderPageNumbers = () => {
-        const pages = []
-        const maxVisiblePages = 5
-
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
-        const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
-
-        if (endPage - startPage + 1 < maxVisiblePages) {
-            startPage = Math.max(1, endPage - maxVisiblePages + 1)
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-            pages.push(
-                <button
-                    key={i}
-                    onClick={() => navigateToPage(i)}
-                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                        i === currentPage
-                            ? 'bg-blue-600 text-white'
-                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-                    }`}
-                >
-                    {i}
-                </button>
-            )
-        }
-
-        return pages
-    }
+    const pageButtons = Array.from({length: totalPages}, (_, index) => (
+        <button
+            key={index + 1}
+            onClick={() => navigateToPage(index + 1)}
+            className={`px-3 py-2 text-sm font-medium rounded-md ${
+                page === index + 1
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+            }`}
+        >
+            {index + 1}
+        </button>
+    ))
 
     return (
         <div className="flex flex-col items-center gap-4 mt-8">
@@ -78,13 +50,10 @@ export default function LinksPagination({
                 Showing {startItem} to {endItem} of {totalItems} results
             </div>
 
-            {isPending && "loading..."}
-
             {/* Pagination controls */}
             <div className="flex items-center gap-2">
-                {/* Previous button */}
                 <button
-                    onClick={() => navigateToPage(currentPage - 1)}
+                    onClick={() => navigateToPage(page - 1)}
                     disabled={currentPage === 1}
                     className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                         currentPage === 1
@@ -96,14 +65,12 @@ export default function LinksPagination({
                     Previous
                 </button>
 
-                {/* Page numbers */}
                 <div className="flex items-center gap-1">
-                    {renderPageNumbers()}
+                    {pageButtons}
                 </div>
 
-                {/* Next button */}
                 <button
-                    onClick={() => navigateToPage(currentPage + 1)}
+                    onClick={() => navigateToPage(page + 1)}
                     disabled={currentPage === totalPages}
                     className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                         currentPage === totalPages

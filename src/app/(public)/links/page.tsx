@@ -3,23 +3,23 @@ import LinksLoading from "@/components/link/links-loading"
 import Links from "@/components/link/links"
 import GetPublicURLs from "@/data/getPublicURLs"
 import LinksPagination from "@/components/LinksPagination"
+import type {SearchParams} from 'nuqs/server'
+import {loadParams} from "@/utils/searchParams";
+
 
 export const metadata = {
     title: "Links",
 }
 
-export default async function LinksPage({
-                                            searchParams,
-                                        }: {
-    searchParams: Promise<{ page?: string | undefined }>
-}) {
-    const params = await searchParams
-    const currentPage = Number(params.page) || 1
-    const pageSize = 4
+interface PageProps {
+    searchParams: Promise<SearchParams>
+}
 
-    // Get paginated data and total count
+export default async function LinksPage({searchParams}: PageProps) {
+    const {page} = await loadParams(searchParams)
+    const pageSize = 4
     const {data: paginatedLinks, totalCount} = await GetPublicURLs({
-        page: currentPage,
+        page,
         pageSize: pageSize,
     })
 
@@ -28,10 +28,10 @@ export default async function LinksPage({
 
     return (
         <div className={"flex justify-center flex-col gap-10 items-center mx-auto pt-32"}>
-            <Suspense fallback={<LinksLoading/>} key={`links-${currentPage}`}>
+            <Suspense fallback={<LinksLoading/>} key={`links-${page}`}>
                 <Links links={paginatedLinks}/>
             </Suspense>
-            <LinksPagination currentPage={currentPage} totalPages={totalPages} totalItems={totalCount}
+            <LinksPagination currentPage={page} totalPages={totalPages} totalItems={totalCount}
                              pageSize={pageSize}/>
         </div>
     )
