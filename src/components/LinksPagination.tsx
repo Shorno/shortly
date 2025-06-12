@@ -1,7 +1,8 @@
 "use client"
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import {useRouter, useSearchParams} from 'next/navigation'
+import {ChevronLeft, ChevronRight} from 'lucide-react'
+import {useTransition} from "react";
 
 interface LinksPaginationProps {
     currentPage: number
@@ -17,19 +18,22 @@ export default function LinksPagination({
                                             pageSize
                                         }: LinksPaginationProps) {
     const router = useRouter()
+    const [isPending, startTransition] = useTransition()
     const searchParams = useSearchParams()
 
     const navigateToPage = (page: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        if (page === 1) {
-            params.set('page', '1'); // Explicitly set page to 1
-        } else {
-            params.set('page', page.toString());
-        }
+        startTransition(() => {
+            const params = new URLSearchParams(searchParams.toString());
+            if (page === 1) {
+                params.set('page', '1');
+            } else {
+                params.set('page', page.toString());
+            }
 
-        const queryString = params.toString();
-        const url = queryString ? `?${queryString}` : '';
-        router.push(url);
+            const queryString = params.toString();
+            const url = queryString ? `?${queryString}` : '';
+            router.push(url);
+        })
     };
 
     const startItem = (currentPage - 1) * pageSize + 1
@@ -74,6 +78,8 @@ export default function LinksPagination({
                 Showing {startItem} to {endItem} of {totalItems} results
             </div>
 
+            {isPending && "loading..."}
+
             {/* Pagination controls */}
             <div className="flex items-center gap-2">
                 {/* Previous button */}
@@ -86,7 +92,7 @@ export default function LinksPagination({
                             : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                     }`}
                 >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-4 h-4"/>
                     Previous
                 </button>
 
@@ -106,7 +112,7 @@ export default function LinksPagination({
                     }`}
                 >
                     Next
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4"/>
                 </button>
             </div>
         </div>

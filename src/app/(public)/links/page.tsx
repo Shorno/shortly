@@ -3,7 +3,6 @@ import LinksLoading from "@/components/link/links-loading"
 import Links from "@/components/link/links"
 import GetPublicURLs from "@/data/getPublicURLs"
 import LinksPagination from "@/components/LinksPagination"
-import {nanoid} from "nanoid";
 
 export const metadata = {
     title: "Links",
@@ -24,13 +23,12 @@ export default async function LinksPage({
         pageSize: pageSize,
     })
 
-    console.log(paginatedLinks)
 
     const totalPages = Math.ceil(totalCount / pageSize)
 
     return (
         <div className={"flex justify-center flex-col gap-10 items-center mx-auto pt-32"}>
-            <Suspense fallback={<LinksLoading/>} key={nanoid(4)}>
+            <Suspense fallback={<LinksLoading/>} key={`links-${currentPage}`}>
                 <Links links={paginatedLinks}/>
             </Suspense>
             <LinksPagination currentPage={currentPage} totalPages={totalPages} totalItems={totalCount}
