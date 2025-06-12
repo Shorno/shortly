@@ -22,7 +22,7 @@ export default function LinksPagination({
     const navigateToPage = (page: number) => {
         const params = new URLSearchParams(searchParams.toString());
         if (page === 1) {
-            params.set('page', '1'); // Explicitly set page to 1
+            params.set('page', '1');
         } else {
             params.set('page', page.toString());
         }
