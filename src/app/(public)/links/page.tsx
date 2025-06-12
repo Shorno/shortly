@@ -27,9 +27,10 @@ export default async function LinksPage({searchParams}: PageProps) {
     const totalPages = Math.ceil(totalCount / pageSize)
 
     return (
-        <div className={"flex justify-center flex-col gap-10 items-center mx-auto pt-32"}>
+        <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-32"}>
             <Suspense fallback={<LinksLoading/>} key={`links-${page}`}>
                 <Links links={paginatedLinks}/>
+                <LinksLoading/>
             </Suspense>
             <LinksPagination currentPage={page} totalPages={totalPages} totalItems={totalCount}
                              pageSize={pageSize}/>
