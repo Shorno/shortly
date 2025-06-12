@@ -1,15 +1,7 @@
 "use client"
 
-import {useRouter, useSearchParams} from "next/navigation"
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
+import { useRouter, useSearchParams } from 'next/navigation'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface LinksPaginationProps {
     currentPage: number
@@ -18,141 +10,106 @@ interface LinksPaginationProps {
     pageSize: number
 }
 
-export default function LinksPagination({currentPage, totalPages, totalItems, pageSize}: LinksPaginationProps) {
-
-
-    console.log("LinksPagination rendered with currentPage:", currentPage, "totalPages:", totalPages, "totalItems:", totalItems, "pageSize:", pageSize)
+export default function LinksPagination({
+                                            currentPage,
+                                            totalPages,
+                                            totalItems,
+                                            pageSize
+                                        }: LinksPaginationProps) {
     const router = useRouter()
     const searchParams = useSearchParams()
 
-    const createPageURL = (pageNumber: number) => {
-        const params = new URLSearchParams(searchParams)
-        params.set("page", pageNumber.toString())
-        return `?${params.toString()}`
-    }
-
-    const handlePageChange = (page: number) => {
-        router.push(createPageURL(page))
-    }
-
-    const handlePrevious = () => {
-        if (currentPage > 1) {
-            handlePageChange(currentPage - 1)
+    const navigateToPage = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (page === 1) {
+            params.set('page', '1'); // Explicitly set page to 1
+        } else {
+            params.set('page', page.toString());
         }
-    }
 
-    const handleNext = () => {
-        if (currentPage < totalPages) {
-            handlePageChange(currentPage + 1)
-        }
-    }
+        const queryString = params.toString();
+        const url = queryString ? `?${queryString}` : '';
+        router.push(url);
+    };
 
-    // Generate page numbers with ellipsis logic
-    const generatePageNumbers = () => {
-        const pages: (number | string)[] = []
+
+    const startItem = (currentPage - 1) * pageSize + 1
+    const endItem = Math.min(currentPage * pageSize, totalItems)
+
+    if (totalPages <= 1) return null
+
+    const renderPageNumbers = () => {
+        const pages = []
         const maxVisiblePages = 5
 
-        if (totalPages <= maxVisiblePages) {
-            // Show all pages if total pages is small
-            for (let i = 1; i <= totalPages; i++) {
-                pages.push(i)
-            }
-        } else {
-            // Show pages with ellipsis
-            if (currentPage <= 3) {
-                // Show first few pages
-                for (let i = 1; i <= 4; i++) {
-                    pages.push(i)
-                }
-                pages.push("ellipsis")
-                pages.push(totalPages)
-            } else if (currentPage >= totalPages - 2) {
-                // Show last few pages
-                pages.push(1)
-                pages.push("ellipsis")
-                for (let i = totalPages - 3; i <= totalPages; i++) {
-                    pages.push(i)
-                }
-            } else {
-                // Show middle pages
-                pages.push(1)
-                pages.push("ellipsis")
-                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-                    pages.push(i)
-                }
-                pages.push("ellipsis")
-                pages.push(totalPages)
-            }
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1)
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(
+                <button
+                    key={i}
+                    onClick={() => navigateToPage(i)}
+                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                        i === currentPage
+                            ? 'bg-blue-600 text-white'
+                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                    }`}
+                >
+                    {i}
+                </button>
+            )
         }
 
         return pages
     }
 
-    // Don't render pagination if there's only one page or no items
-    if (totalPages <= 1) {
-        return null
-    }
-
-    const startItem = (currentPage - 1) * pageSize + 1
-    const endItem = Math.min(currentPage * pageSize, totalItems)
-
     return (
-        <div className="flex flex-col items-center gap-4">
-            {/* Page info */}
-            <p className="text-sm text-muted-foreground">
-                Showing {startItem}-{endItem} of {totalItems} links
-            </p>
+        <div className="flex flex-col items-center gap-4 mt-8">
+            {/* Results info */}
+            <div className="text-sm text-gray-700 dark:text-gray-300">
+                Showing {startItem} to {endItem} of {totalItems} results
+            </div>
 
-            <Pagination>
-                <PaginationContent>
-                    <PaginationItem>
-                        <PaginationPrevious
-                            href={currentPage > 1 ? createPageURL(currentPage - 1) : "#"}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                handlePrevious()
-                            }}
-                            className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                        />
-                    </PaginationItem>
+            {/* Pagination controls */}
+            <div className="flex items-center gap-2">
+                {/* Previous button */}
+                <button
+                    onClick={() => navigateToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                        currentPage === 1
+                            ? 'text-gray-400 cursor-not-allowed'
+                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                    }`}
+                >
+                    <ChevronLeft className="w-4 h-4" />
+                    Previous
+                </button>
 
-                    {generatePageNumbers().map((page, index) => (
-                        <PaginationItem key={index}>
-                            {page === "ellipsis" ? (
-                                <PaginationEllipsis/>
-                            ) : (
-                                <PaginationLink
-                                    href={createPageURL(page as number)}
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        handlePageChange(page as number)
-                                    }}
-                                    isActive={currentPage === page}
-                                    className="cursor-pointer"
-                                >
-                                    {page}
-                                </PaginationLink>
-                            )}
-                        </PaginationItem>
-                    ))}
+                {/* Page numbers */}
+                <div className="flex items-center gap-1">
+                    {renderPageNumbers()}
+                </div>
 
-                    <PaginationItem>
-                        <PaginationNext
-                            href={currentPage < totalPages ? createPageURL(currentPage + 1) : "#"}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                handleNext()
-                            }}
-                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                        />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
-
-            {/* Current page indicator */}
-            <p className="text-xs text-muted-foreground">
-                Page {currentPage} of {totalPages}
-            </p>
+                {/* Next button */}
+                <button
+                    onClick={() => navigateToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                        currentPage === totalPages
+                            ? 'text-gray-400 cursor-not-allowed'
+                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                    }`}
+                >
+                    Next
+                    <ChevronRight className="w-4 h-4" />
+                </button>
+            </div>
         </div>
     )
 }
