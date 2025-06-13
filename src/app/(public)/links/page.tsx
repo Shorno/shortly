@@ -17,7 +17,7 @@ interface PageProps {
 
 export default async function LinksPage({searchParams}: PageProps) {
     const {page} = await loadParams(searchParams)
-    const pageSize = 4
+    const pageSize = 5
     const {data: paginatedLinks, totalCount} = await GetPublicURLs({
         page,
         pageSize: pageSize,

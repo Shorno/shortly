@@ -1,8 +1,8 @@
 "use cache"
 
-import { db } from "@/db"
-import { eq, count } from "drizzle-orm"
-import { links } from "@/db/schema"
+import {db} from "@/db"
+import {eq, count} from "drizzle-orm"
+import {links} from "@/db/schema"
 
 export interface ShortURL {
     id: number
@@ -22,7 +22,7 @@ export interface PaginatedURLs {
 
 export default async function GetPublicURLs({
                                                 page = 1,
-                                                pageSize = 4,
+                                                pageSize = 5,
                                             }: {
     page?: number
     pageSize?: number
@@ -34,7 +34,7 @@ export default async function GetPublicURLs({
         offset: (page - 1) * pageSize,
     })
 
-    const totalCountResult = await db.select({ count: count() }).from(links).where(eq(links.is_public, true))
+    const totalCountResult = await db.select({count: count()}).from(links).where(eq(links.is_public, true))
 
     const totalCount = totalCountResult[0]?.count || 0
 
