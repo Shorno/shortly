@@ -1,5 +1,5 @@
 import {GetUser} from "@/data/getUser";
-import {getCachedUserLinks} from "@/data/getCachedUserLinks";
+import {getUserLinks} from "@/data/getUserLinks";
 import {PaginatedURLs} from "@/data/getPublicURLs";
 import getLinksFromRedis from "./userRedisUserLinks";
 import redis from "@/lib/redis";
@@ -36,9 +36,7 @@ export async function GetUserURLs({
             };
         }
 
-        console.time("cached-db-time");
-        const dbLinks = await getCachedUserLinks(user.id, page, pageSize);
-        console.timeEnd("cached-db-time");
+        const dbLinks = await getUserLinks(user.id, page, pageSize);
 
 
         await redis.set(

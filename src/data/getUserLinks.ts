@@ -4,18 +4,17 @@ import {count, eq} from "drizzle-orm";
 import {links} from "@/db/schema";
 import {PaginatedURLs} from "@/data/getPublicURLs";
 
-export async function getCachedUserLinks(
+export async function getUserLinks(
     userId: string,
     page: number = 1,
     pageSize: number = 10
 ): Promise<PaginatedURLs> {
-    "use cache"
 
     const data = await db.query.links.findMany({
         where: eq(links.user_id, userId),
         limit: pageSize,
         offset: (page - 1) * pageSize,
-        orderBy: (links, { desc }) => [desc(links.id)]
+        orderBy: (links, {desc}) => [desc(links.id)]
     });
 
     const totalCountResult = await db.select({count: count()})
