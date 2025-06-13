@@ -1,6 +1,8 @@
 import {GetUser} from "@/data/getUser";
 import {getCachedUserLinks} from "@/data/getCachedUserLinks";
 import {PaginatedURLs} from "@/data/getPublicURLs";
+import getLinksFromRedis from "./userRedisUserLinks";
+import redis from "@/lib/redis";
 
 interface PaginatedURLsWithStatus extends PaginatedURLs {
     status: number;
@@ -19,32 +21,32 @@ export async function GetUserURLs({
         const user = await GetUser();
         console.timeEnd("auth-time");
 
-        // const cacheKey = `user-links:${user.id}:page:${page}:size:${pageSize}`;
+        const cacheKey = `user-links:${user.id}:page:${page}:size:${pageSize}`;
 
-        // console.time("®️ redis-cache-time");
-        // const redisLinks = await getLinksFromRedis(cacheKey);
-        // console.timeEnd("®️ redis-cache-time");
+        console.time("®️ redis-cache-time");
+        const redisLinks = await getLinksFromRedis(cacheKey);
+        console.timeEnd("®️ redis-cache-time");
 
-        // if (redisLinks) {
-        //     console.log("🟢 Returning from Redis cache");
-        //     return {
-        //         data: redisLinks.data,
-        //         totalCount: redisLinks.totalCount,
-        //         status: 200
-        //     };
-        // }
+        if (redisLinks) {
+            console.log("🟢 Returning from Redis cache");
+            return {
+                data: redisLinks.data,
+                totalCount: redisLinks.totalCount,
+                status: 200
+            };
+        }
 
         console.time("cached-db-time");
         const dbLinks = await getCachedUserLinks(user.id, page, pageSize);
         console.timeEnd("cached-db-time");
 
 
-        // await redis.set(
-        //     cacheKey,
-        //     JSON.stringify(dbLinks),
-        //     "EX",
-        //     5 * 60 // 5 minutes
-        // );
+        await redis.set(
+            cacheKey,
+            JSON.stringify(dbLinks),
+            "EX",
+            5 * 60 // 5 minutes
+        );
 
         return {
             data: dbLinks.data,
