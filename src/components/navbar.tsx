@@ -17,7 +17,7 @@ export default function Navbar() {
     const isPublicLinksActive = pathname === "/links";
 
     return (
-        <nav className={`w-full fixed z-50 ${isScrolled ? "bg-[#020013]/85" : "bg-transparent"} transition-all duration-200 shadow-sm backdrop-blur-md`}>
+        <nav className={`w-full fixed z-50 ${isScrolled ? "bg-[#020013]/85 shadow-sm backdrop-blur-md" : ""} transition-all duration-200 `}>
             <div className={"mx-auto container flex items-center justify-between py-4 px-4 lg:px-0"}>
                 <div>
                     <Link href={"/"} className={"text-xl lg:text-3xl font-semibold"}>Shortly</Link>

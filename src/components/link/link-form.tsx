@@ -97,11 +97,6 @@ export default function LinkForm() {
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Shorten Your URL</h2>
                     </motion.div>
 
-                    <motion.p className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg" variants={itemVariants}>
-                        Transform long, unwieldy links into clean, memorable and trackable short URLs with just one
-                        click.
-                    </motion.p>
-
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <motion.div variants={itemVariants}>

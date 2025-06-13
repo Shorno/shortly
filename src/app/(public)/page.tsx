@@ -1,5 +1,6 @@
 import LinkForm from "@/components/link/link-form";
 import {Metadata} from "next";
+import HeaderText from "@/components/header-text";
 
 export const metadata: Metadata = {
     title: {
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
 }
 export default async function Home() {
     return (
-        <div className={"flex justify-center pt-24 lg:pt-32 items-center flex-col"}>
+        <div className={"flex justify-center py-32 items-center flex-col gap-8"}>
+            <HeaderText/>
             <LinkForm/>
         </div>
     );

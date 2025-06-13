@@ -150,7 +150,9 @@
 }
 
 body {
-  letter-spacing: var(--tracking-normal);
+    letter-spacing: var(--tracking-normal);
+    font-family: var(--font-geist-sans), sans-serif;
+
 }
 @layer base {
   button, [role="button"] {

@@ -17,7 +17,7 @@ export default function PublicLayout({
     return (
         <>
             <Navbar/>
-            <div className={"bg-[#020013] min-h-screen"}>
+            <div className={"bg-[url('/abstract.webp')] bg-center md:bg-cover bg-no-repeat min-h-screen"}>
                 {children}
             </div>
         </>
