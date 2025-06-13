@@ -11,13 +11,13 @@ export const metadata = {
     title: "Links",
 }
 
-interface PageProps {
+export interface PageProps {
     searchParams: Promise<SearchParams>
 }
 
 export default async function LinksPage({searchParams}: PageProps) {
     const {page} = await loadParams(searchParams)
-    const pageSize = 5
+    const pageSize = 10
     const {data: paginatedLinks, totalCount} = await GetPublicURLs({
         page,
         pageSize: pageSize,
@@ -31,8 +31,12 @@ export default async function LinksPage({searchParams}: PageProps) {
             <Suspense fallback={<LinksLoading/>} key={`links-${page}`}>
                 <Links links={paginatedLinks}/>
             </Suspense>
-            <LinksPagination currentPage={page} totalPages={totalPages} totalItems={totalCount}
-                             pageSize={pageSize}/>
+            <LinksPagination
+                currentPage={page}
+                totalPages={totalPages}
+                totalItems={totalCount}
+                pageSize={pageSize}
+            />
         </div>
     )
 }
