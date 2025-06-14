@@ -24,14 +24,6 @@ interface CongratulationsModalProps {
 }
 
 export default function CongratulationsModal({ isOpen, onCloseAction, shortUrlData }: CongratulationsModalProps) {
-    shortUrlData = {
-        original_url: "https://github.com/opennextjs/opennextjs-cloudflare/issues/231",
-        short_url: "http://localhost:3000/s/vzeUqV",
-        generated_id: "vzeUqV",
-        site_favicon: "https://www.google.com/s2/favicons?domain=github.com&sz=64",
-        site_title: "[BUG] env is not accessible writing inline · Issue #231 · opennextjs/opennextjs-cloudflare"
-    }
-
     const router = useRouter()
     const [copied, copy] = useCopyToClipboard()
 
