@@ -4,6 +4,7 @@ import {revalidatePath} from "next/cache";
 import {db} from "@/db";
 import {links} from "@/db/schema";
 import GetMetadata from "@/utils/getMetadata";
+import {cookies} from "next/headers";
 
 export default async function GenerateShortURL(originalURL: string) {
 
@@ -23,10 +24,31 @@ export default async function GenerateShortURL(originalURL: string) {
         site_favicon: favicon
     }
 
+    const firstTimeCookie = "hasCreatedShortURL"
+
+
+    const cookieStore = await cookies()
+    const hasCreatedBefore = cookieStore.has(firstTimeCookie)
+
+
+    if (!hasCreatedBefore) {
+        cookieStore.set(firstTimeCookie, 'true', {
+            maxAge: 365 * 24 * 60 * 60,
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax'
+        });
+    }
+
+
     try {
         await db.insert(links).values(data)
         revalidatePath("/links")
-        return {success: true}
+        return {
+            success: true,
+            isFirstTime: !hasCreatedBefore,
+            shortURL: data
+        }
 
     } catch (error: unknown) {
         if (error instanceof Error) {
