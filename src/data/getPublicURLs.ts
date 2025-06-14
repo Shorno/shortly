@@ -32,6 +32,7 @@ export default async function GetPublicURLs({
         where: eq(links.is_public, true),
         limit: pageSize,
         offset: (page - 1) * pageSize,
+        orderBy: (links, {desc}) => [desc(links.id)]
     })
 
     const totalCountResult = await db.select({count: count()}).from(links).where(eq(links.is_public, true))
