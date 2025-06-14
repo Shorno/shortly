@@ -31,7 +31,7 @@ interface ShortUrlData {
 export default function LinkForm() {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
-    const [showCongratulationsModal, setShowCongratulationsModal] = useState(true)
+    const [showCongratulationsModal, setShowCongratulationsModal] = useState(false)
     const [shortUrlData, setShortUrlData] = useState<ShortUrlData | null>(null)
 
     const form = useForm<LinkFormValues>({
