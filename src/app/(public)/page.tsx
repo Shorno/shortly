@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 export default async function Home() {
     return (
-        <div className={"flex justify-center py-32 items-center flex-col gap-8"}>
+        <div className={"bg-[url('/abstract.webp')] min-h-screen bg-center md:bg-cover bg-no-repeat flex justify-center py-32 items-center flex-col gap-8 "}>
             <HeaderText/>
             <LinkForm/>
         </div>

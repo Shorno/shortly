@@ -9,7 +9,7 @@ export default function HeaderText() {
                 </p>
             </div>
             <div className="max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-3xl">
-                <p className="sm:text-xl md:text-2xl text-[#d9dff2] dark:text-gray-300">
+                <p className="sm:text-xl text-[#d9dff2] dark:text-gray-300">
                     Transform long, unwieldy links into clean, memorable and trackable short URLs with just one click.
                 </p>
             </div>
