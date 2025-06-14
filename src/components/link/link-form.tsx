@@ -175,7 +175,7 @@ export default function LinkForm() {
 
             <CongratulationsModal
                 isOpen={showCongratulationsModal}
-                onClose={() => setShowCongratulationsModal(false)}
+                onCloseAction={() => setShowCongratulationsModal(false)}
                 shortUrlData={shortUrlData}
             />
         </>
