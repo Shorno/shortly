@@ -20,10 +20,10 @@ const formSchema = z.object({
 
 type LinkFormValues = z.infer<typeof formSchema>
 
-interface ShortUrlData {
+export interface ShortUrlData {
     original_url: string
     short_url: string
-    generated_id: string
+    slug: string
     site_title: string
     site_favicon: string
 }

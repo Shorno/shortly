@@ -9,10 +9,10 @@ import {useMemo} from "react"
 interface AnalyticsDashboardProps {
     visitCount: number
     visitTimestamps: Array<{ visitedAt: Date }>
-    generatedId: string
+    slug: string
 }
 
-export default function AnalyticsDashboard({visitCount, visitTimestamps, generatedId}: AnalyticsDashboardProps) {
+export default function AnalyticsDashboard({visitCount, visitTimestamps, slug}: AnalyticsDashboardProps) {
     const analyticsData = useMemo(() => {
         const visits = visitTimestamps.map((v) => new Date(v.visitedAt))
 
@@ -268,7 +268,7 @@ export default function AnalyticsDashboard({visitCount, visitTimestamps, generat
                             className="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
                             <ExternalLink className="h-4 w-4 text-gray-400"/>
                             <span
-                                className="text-sm font-mono text-gray-600 dark:text-gray-300">short.url/{generatedId}</span>
+                                className="text-sm font-mono text-gray-600 dark:text-gray-300">short.url/{slug}</span>
                         </div>
                     </CardContent>
                 </Card>

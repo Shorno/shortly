@@ -28,7 +28,7 @@ export default async function GeneratePrivateURL(originalURL: string) {
         const data = {
             original_url: originalURL,
             short_url: shortURL,
-            generated_id: randomID,
+            slug: randomID,
             site_title: title,
             site_favicon: favicon,
             is_public: false,

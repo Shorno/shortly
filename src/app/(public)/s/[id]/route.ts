@@ -16,7 +16,7 @@ export async function GET(
     }
 
     await db.insert(analytics).values({
-        linkGeneratedId: id
+        linkSlug: id
     });
 
     revalidateTag(`analytics-${id}`)

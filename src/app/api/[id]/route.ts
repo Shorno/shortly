@@ -5,7 +5,7 @@ import {db} from "@/db";
 export async function GET(request: NextRequest, {params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
     const existingLink = await db.query.links.findFirst({
-        where: (links, {eq}) => eq(links.generated_id, id)
+        where: (links, {eq}) => eq(links.slug, id)
     })
 
     if (!existingLink) {
