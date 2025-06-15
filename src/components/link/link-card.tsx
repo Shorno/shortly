@@ -11,7 +11,7 @@ export default function LinkCard({
                                      short_url,
                                      site_title,
                                      site_favicon,
-                                     generated_id,
+                                     slug,
                                      is_public,
                                      user_id
                                  }: ShortURL) {
@@ -23,7 +23,7 @@ export default function LinkCard({
                       <div>
                           <LinkDisplay
                               id={id}
-                              generated_id={generated_id}
+                              slug={slug}
                               original_url={original_url}
                               short_url={short_url}
                               site_favicon={site_favicon}

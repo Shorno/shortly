@@ -6,7 +6,7 @@ import {links} from "@/db/schema"
 
 export interface ShortURL {
     id: number
-    generated_id: string
+    slug: string
     original_url: string
     short_url: string
     site_favicon: string

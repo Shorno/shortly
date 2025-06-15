@@ -16,7 +16,7 @@ export default async function Links({links}: LinksProps) {
                     <LinkCard
                         key={link.id}
                         id={link.id}
-                        generated_id={link.generated_id}
+                        slug={link.slug}
                         original_url={link.original_url}
                         short_url={link.short_url}
                         site_favicon={link.site_favicon}

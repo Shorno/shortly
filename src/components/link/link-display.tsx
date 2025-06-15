@@ -8,7 +8,7 @@ export default function LinkDisplay({
                                         short_url,
                                         site_title,
                                         site_favicon,
-                                        generated_id,
+                                        slug,
                                         is_public
                                     }: ShortURL) {
     return (
@@ -30,7 +30,7 @@ export default function LinkDisplay({
                 <div>
                     {
                         !is_public
-                            ? <Link className={"text-blue-500 flex mt-4"} href={`/dashboard/analytics/${generated_id}`}>View
+                            ? <Link className={"text-blue-500 flex mt-4"} href={`/dashboard/analytics/${slug}`}>View
                                 Analytics <ArrowRight/></Link>
                             :
                             null
