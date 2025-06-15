@@ -1,9 +1,6 @@
-import {Card, CardContent} from "@/components/ui/card";
-import LinkActions from "@/components/link/link-actions";
-import LinkDisplay from "@/components/link/link-display";
-import {Separator} from "@/components/ui/separator";
-import {ShortURL} from "@/data/getPublicURLs";
-
+import { Card, CardContent } from "@/components/ui/card"
+import LinkDisplay from "@/components/link/link-display"
+import type { ShortURL } from "@/data/getPublicURLs"
 
 export default function LinkCard({
                                      id,
@@ -13,30 +10,22 @@ export default function LinkCard({
                                      site_favicon,
                                      slug,
                                      is_public,
-                                     user_id
+                                     user_id,
                                  }: ShortURL) {
     return (
-        <>
-            <Card className={"border-none rounded-sm mx-4 md:mx-0"}>
-                <CardContent>
-                    <div className={"flex flex-col md:flex-row gap-2 justify-between "}>
-                      <div>
-                          <LinkDisplay
-                              id={id}
-                              slug={slug}
-                              original_url={original_url}
-                              short_url={short_url}
-                              site_favicon={site_favicon}
-                              site_title={site_title}
-                              user_id={user_id}
-                              is_public={is_public}
-                          />
-                      </div>
-                        <Separator className={"md:hidden"}/>
-                        <LinkActions shortURL={short_url}/>
-                    </div>
-                </CardContent>
-            </Card>
-        </>
+        <Card className="border border-gray-200 dark:border-gray-800 rounded-md mx-4 md:mx-0 hover:shadow-sm transition-shadow duration-200">
+            <CardContent className="px-4 py-1 md:py-2">
+                <LinkDisplay
+                    id={id}
+                    slug={slug}
+                    original_url={original_url}
+                    short_url={short_url}
+                    site_favicon={site_favicon}
+                    site_title={site_title}
+                    user_id={user_id}
+                    is_public={is_public}
+                />
+            </CardContent>
+        </Card>
     )
 }
