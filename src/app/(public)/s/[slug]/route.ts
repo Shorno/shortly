@@ -6,20 +6,20 @@ import {NextRequest} from "next/server";
 
 export async function GET(
     request: NextRequest,
-    {params}: { params: Promise<{ id: string }> }
+    {params}: { params: Promise<{ slug: string }> }
 ) {
-    const {id} = await params;
-    const response = await GetOriginalURL(id);
+    const {slug} = await params;
+    const response = await GetOriginalURL(slug);
 
     if (!response.success) {
         return new Response("Not Found", {status: 404});
     }
 
     await db.insert(analytics).values({
-        linkSlug: id
+        linkSlug: slug
     });
 
-    revalidateTag(`analytics-${id}`)
+    revalidateTag(`analytics-${slug}`)
 
     return Response.redirect(response.data.original_url, 302);
 }
