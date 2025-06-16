@@ -11,8 +11,8 @@ export interface ShortURL {
     short_url: string
     site_favicon: string
     site_title: string
-    user_id: string | null
-    is_public: boolean
+    user_id?: string | null
+    is_public?: boolean
 }
 
 export interface PaginatedURLs {

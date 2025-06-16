@@ -1,19 +1,21 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
-import { Eye, Calendar, Star } from "lucide-react"
-import type { ShortURL } from "@/data/getPublicURLs"
-import LinkActions from "@/components/link/link-actions"
+import type {ShortURL} from "@/data/getPublicURLs"
+import {Button} from "@/components/ui/button";
+import {Copy} from "lucide-react";
+import useCopyToClipboard from "@/hooks/useCopyToClipboard";
+import {toast} from "sonner";
 
-export default function LinkDisplay({ original_url, short_url, site_title, site_favicon, slug, is_public }: ShortURL) {
-    // Dummy analytics data - you can replace this with real data later
-    const dummyClicks = Math.floor(Math.random() * 2000) + 50
-    const dummyDate = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-    })
-    const isFavorite = Math.random() > 0.7 // Random favorite status for demo
+export default function PublicLinkDisplay({original_url, short_url, site_title, site_favicon}: ShortURL) {
+    const [, copy] = useCopyToClipboard()
 
+    const handleCopy = async () => {
+        const success = await copy(short_url)
+        if (success) {
+            toast.success("Link copied to clipboard!")
+        }
+    }
     const truncateUrl = (url: string, maxLength = 50) => {
         if (url.length <= maxLength) return url
         return url.substring(0, maxLength) + "..."
@@ -40,12 +42,10 @@ export default function LinkDisplay({ original_url, short_url, site_title, site_
                             <h3 className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight line-clamp-1">
                                 {site_title}
                             </h3>
-                            {isFavorite && <Star className="h-4 w-4 text-yellow-500 fill-current flex-shrink-0" />}
                         </div>
 
                         {/* Short URL */}
                         <Link
-                            prefetch={false}
                             className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-sm font-medium block"
                             href={short_url}
                             target="_blank"
@@ -64,31 +64,16 @@ export default function LinkDisplay({ original_url, short_url, site_title, site_
                         </Link>
                     </div>
                 </div>
-                <LinkActions shortURL={short_url} />
+                <Button
+                    onClick={handleCopy}
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                    <Copy className="h-4 w-4 text-gray-500"/>
+                </Button>
             </div>
 
-            {/* Footer with analytics */}
-            <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800">
-                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center gap-1">
-                        <Eye className="h-4 w-4" />
-                        <span>{dummyClicks.toLocaleString()} clicks</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{dummyDate}</span>
-                    </div>
-                </div>
-
-                {!is_public && (
-                    <Link
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-sm font-medium"
-                        href={`/dashboard/analytics/${slug}`}
-                    >
-                        Analytics
-                    </Link>
-                )}
-            </div>
         </div>
     )
 }

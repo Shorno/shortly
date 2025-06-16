@@ -1,14 +1,14 @@
 import {Suspense} from "react";
 import LinksLoading from "@/components/link/links-loading";
-import Links from "@/components/link/links";
 import {GetUserURLs} from "@/data/getUserURLs";
 import UnauthorizedCard from "@/components/un-authorized";
 import {PageProps} from "@/app/(public)/links/page";
 import {loadParams} from "@/utils/searchParams";
 import LinksPagination from "@/components/LinksPagination";
+import Link from "@/components/link/user/link";
 
 export const metadata = {
-    title: "Links"
+    title: "PublicLinks"
 }
 
 export default async function MyLinksPage({searchParams}: PageProps) {
@@ -28,7 +28,7 @@ export default async function MyLinksPage({searchParams}: PageProps) {
     return (
         <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-20"}>
             <Suspense fallback={<LinksLoading/>}>
-                <Links links={response?.data}/>
+                <Link links={response?.data}/>
             </Suspense>
             <LinksPagination
                 currentPage={page}

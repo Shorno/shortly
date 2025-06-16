@@ -1,6 +1,6 @@
 import {Suspense} from "react"
 import LinksLoading from "@/components/link/links-loading"
-import Links from "@/components/link/links"
+import PublicLink from "@/components/link/public/public-link"
 import GetPublicURLs from "@/data/getPublicURLs"
 import LinksPagination from "@/components/LinksPagination"
 import type {SearchParams} from 'nuqs/server'
@@ -8,7 +8,7 @@ import {loadParams} from "@/utils/searchParams";
 
 
 export const metadata = {
-    title: "Links",
+    title: "PublicLinks",
 }
 
 export interface PageProps {
@@ -29,7 +29,7 @@ export default async function LinksPage({searchParams}: PageProps) {
     return (
         <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-32"}>
             <Suspense fallback={<LinksLoading/>} key={`links-${page}`}>
-                <Links links={paginatedLinks}/>
+                <PublicLink links={paginatedLinks}/>
             </Suspense>
             <LinksPagination
                 currentPage={page}

@@ -36,7 +36,7 @@ export default function UserLinkForm() {
             if (response?.success) {
                 toast.success("Link Generated", {
                     action: {
-                        label: "View Links",
+                        label: "View PublicLinks",
                         onClick: () => router.push("/dashboard/my-links")
                     }
                 })

@@ -52,7 +52,7 @@ export default function LinkForm() {
                 } else {
                     toast.success("Link Generated", {
                         action: {
-                            label: "View Links",
+                            label: "View PublicLinks",
                             onClick: () => router.push("/links"),
                         },
                     })
