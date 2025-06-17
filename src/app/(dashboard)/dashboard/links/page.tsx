@@ -8,7 +8,7 @@ import LinksPagination from "@/components/LinksPagination";
 import Link from "@/components/link/user/link";
 
 export const metadata = {
-    title: "PublicLinks"
+    title: "Links"
 }
 
 export default async function MyLinksPage({searchParams}: PageProps) {

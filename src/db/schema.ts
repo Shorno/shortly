@@ -15,13 +15,19 @@ export const links = pgTable("links", {
 
 export const analytics = pgTable("analytics", {
     id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-    linkSlug: varchar("link_slug", {length: 50}).notNull().references(() => links.slug, {onDelete: "cascade"}),
+    linkSlug: varchar("link_slug", {length: 50}).notNull().references(() => links.slug, {
+        onDelete: "cascade",
+        onUpdate: "cascade"
+    }),
     visitedAt: timestamp("visited_at", {withTimezone: true}).notNull().defaultNow(),
 })
 
 export const linkDailyStats = pgTable("link_daily_stats", {
     id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-    linkSlug: varchar("link_slug", {length: 50}).notNull().references(() => links.slug, {onDelete: "cascade"}),
+    linkSlug: varchar("link_slug", {length: 50}).notNull().references(() => links.slug, {
+        onDelete: "cascade",
+        onUpdate: "cascade"
+    }),
     date: date("date").notNull(),
     visitCount: integer("visit_count").notNull().default(0)
 })
