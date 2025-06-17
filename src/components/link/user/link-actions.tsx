@@ -14,7 +14,7 @@ import {useState} from "react";
 import EditSlugModal from "@/components/link/user/edit-slug-modal";
 import type {ShortURL} from "@/data/getPublicURLs";
 
-export default function LinkActions({original_url, short_url, site_title, site_favicon, slug, user_id, id}: ShortURL) {
+export default function LinkActions({short_url, id}: ShortURL) {
     const [showEditSlugModal, setShowEditSlugModal] = useState(false)
     const [, copy] = useCopyToClipboard()
 

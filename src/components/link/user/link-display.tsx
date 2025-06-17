@@ -6,7 +6,6 @@ import LinkActions from "@/components/link/user/link-actions"
 import {Separator} from "@/components/ui/separator";
 
 export default function LinkDisplay({original_url, short_url, site_title, site_favicon, slug, user_id, id}: ShortURL) {
-    // Dummy analytics data - you can replace this with real data later
     const dummyClicks = Math.floor(Math.random() * 2000) + 50
     const dummyDate = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
         month: "short",
