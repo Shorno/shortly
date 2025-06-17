@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/button";
 import {Copy} from "lucide-react";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import {toast} from "sonner";
+import {truncateUrl} from "@/utils/truncateUrl";
 
 export default function PublicLinkDisplay({original_url, short_url, site_title, site_favicon}: ShortURL) {
     const [, copy] = useCopyToClipboard()
@@ -16,15 +17,11 @@ export default function PublicLinkDisplay({original_url, short_url, site_title, 
             toast.success("Link copied to clipboard!")
         }
     }
-    const truncateUrl = (url: string, maxLength = 50) => {
-        if (url.length <= maxLength) return url
-        return url.substring(0, maxLength) + "..."
-    }
+
 
     return (
         <div className="space-y-3">
-            {/* Header with favicon, title, and actions */}
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex items-start justify-between  gap-3">
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                     <div className="flex-shrink-0 mt-0.5">
                         <Image
@@ -37,14 +34,12 @@ export default function PublicLinkDisplay({original_url, short_url, site_title, 
                     </div>
 
                     <div className="flex-1 min-w-0 space-y-1">
-                        {/* Title with optional star */}
                         <div className="flex items-center gap-2">
                             <h3 className="font-medium text-gray-900 dark:text-gray-100 text-sm leading-tight line-clamp-1">
                                 {site_title}
                             </h3>
                         </div>
 
-                        {/* Short URL */}
                         <Link
                             className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-sm font-medium block"
                             href={short_url}
@@ -53,14 +48,13 @@ export default function PublicLinkDisplay({original_url, short_url, site_title, 
                             {short_url}
                         </Link>
 
-                        {/* Original URL */}
                         <Link
                             prefetch={false}
-                            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors text-sm block"
+                            className="text-gray-500 text-wrapdark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors text-sm block"
                             href={original_url}
                             target="_blank"
                         >
-                            {truncateUrl(original_url, 60)}
+                            {truncateUrl(original_url, 30)}
                         </Link>
                     </div>
                 </div>

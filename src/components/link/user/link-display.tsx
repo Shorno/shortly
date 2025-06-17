@@ -4,6 +4,7 @@ import {Eye, Calendar, Star} from "lucide-react"
 import type {ShortURL} from "@/data/getPublicURLs"
 import LinkActions from "@/components/link/user/link-actions"
 import {Separator} from "@/components/ui/separator";
+import {truncateUrl} from "@/utils/truncateUrl";
 
 export default function LinkDisplay({original_url, short_url, site_title, site_favicon, slug, user_id, id}: ShortURL) {
     const dummyClicks = Math.floor(Math.random() * 2000) + 50
@@ -14,10 +15,6 @@ export default function LinkDisplay({original_url, short_url, site_title, site_f
     })
     const isFavorite = Math.random() > 0.7
 
-    const truncateUrl = (url: string, maxLength = 50) => {
-        if (url.length <= maxLength) return url
-        return url.substring(0, maxLength) + "..."
-    }
 
     return (
         <div className="space-y-3">
@@ -59,7 +56,7 @@ export default function LinkDisplay({original_url, short_url, site_title, site_f
                             href={original_url}
                             target="_blank"
                         >
-                            {truncateUrl(original_url, 60)}
+                            {truncateUrl(original_url, 30)}
                         </Link>
                     </div>
                 </div>

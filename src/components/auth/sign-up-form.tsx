@@ -53,7 +53,7 @@ export default function SignUpForm() {
     }
 
     return (
-        <Card className="w-full max-w-md mx-auto">
+        <Card className="w-full max-w-11/12 md:max-w-md mx-auto">
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl font-semibold">Create an account</CardTitle>
                 <CardDescription>Enter your details below to create your account</CardDescription>
@@ -125,7 +125,7 @@ export default function SignUpForm() {
 
                 <div className="mt-4 text-center text-sm">
                     Already have an account?{" "}
-                    <Link href="/signin" className="text-blue-500 hover:underline font-medium">
+                    <Link href="/login" className="text-blue-500 hover:underline font-medium">
                         Sign in
                     </Link>
                 </div>

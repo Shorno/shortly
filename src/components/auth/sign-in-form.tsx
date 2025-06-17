@@ -55,7 +55,7 @@ export default function SignInForm() {
     }
 
     return (
-        <Card className="w-full max-w-md mx-auto">
+        <Card className="w-full max-w-11/12 md:max-w-md mx-auto">
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl font-semibold">Welcome back</CardTitle>
                 <CardDescription>Enter your credentials to access your account</CardDescription>

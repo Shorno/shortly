@@ -2,7 +2,7 @@ export default function HeaderText() {
     return (
         <div className="flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8  text-center">
             <div className="text-center">
-                <p className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Shorten and
+                <p className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">Shorten and
                     Track</p>
                 <p className="text-3xl md:text-4xl lg:text-5xl font-bold">
                     <span className="text-[#ff6060]">Long</span> <span className="text-[#ffbe53]">Links Instantly</span>

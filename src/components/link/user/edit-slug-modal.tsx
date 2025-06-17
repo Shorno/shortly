@@ -97,7 +97,7 @@ export default function EditSlugModal({isOpen, onCloseAction, short_url, id}: Mo
                         />
 
                         <div className="flex justify-end space-x-2 pt-4">
-                            <Button type="button" variant="secondary" onClick={onCloseAction} disabled={isSubmitting}>
+                            <Button type="button" variant="outline" onClick={onCloseAction} disabled={isSubmitting}>
                                 Cancel
                             </Button>
                             <Button

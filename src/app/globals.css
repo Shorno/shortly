@@ -112,9 +112,14 @@
 }
 
 body {
-    font-family: var(--font-geist-sans), sans-serif;
+  @apply bg-background text-foreground;
+  font-family: var(--font-geist-sans), sans-serif;
+
 }
 @layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
   button, [role="button"] {
     cursor: pointer;
   }

@@ -26,7 +26,7 @@ export default async function MyLinksPage({searchParams}: PageProps) {
     if (response?.status === 401) return <div className={"mt-32"}><UnauthorizedCard/></div>
 
     return (
-        <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-20"}>
+        <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-32"}>
             <Suspense fallback={<LinksLoading/>}>
                 <Link links={response?.data}/>
             </Suspense>
