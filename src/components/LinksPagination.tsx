@@ -1,6 +1,5 @@
 "use client"
 import {ChevronLeft, ChevronRight} from 'lucide-react'
-import {useTransition} from "react";
 import {useQueryState, parseAsInteger} from "nuqs";
 
 interface LinksPaginationProps {
@@ -16,9 +15,8 @@ export default function LinksPagination({
                                             totalItems,
                                             pageSize
                                         }: LinksPaginationProps) {
-    const [, startTransition] = useTransition()
     const [page, setPage] = useQueryState("page",
-        parseAsInteger.withDefault(1).withOptions({shallow: false, history: 'replace', startTransition})
+        parseAsInteger.withDefault(1).withOptions({shallow: false, history: 'replace'})
     )
 
 

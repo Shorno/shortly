@@ -7,8 +7,8 @@ export const metadata = {
 
 export default async function Dashboard() {
     return (
-        <>
+        <div className={"py-20"}>
             <UserLinkForm/>
-        </>
+        </div>
     )
 }

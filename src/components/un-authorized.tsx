@@ -35,7 +35,7 @@ export default function UnauthorizedCard() {
                         <Button
                             asChild
                             className="bg-purple-600 hover:bg-purple-700 text-white py-6 px-8 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg mx-auto">
-                            <Link href={"/signin"}>
+                            <Link href={"/login"}>
                                 <LogIn className="h-5 w-5"/>
                                 <span>Login to Your Account</span>
                                 <ArrowRight className="h-5 w-5"/>

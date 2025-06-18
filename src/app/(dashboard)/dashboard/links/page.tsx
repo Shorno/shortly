@@ -5,7 +5,7 @@ import UnauthorizedCard from "@/components/un-authorized";
 import {PageProps} from "@/app/(public)/links/page";
 import {loadParams} from "@/utils/searchParams";
 import LinksPagination from "@/components/LinksPagination";
-import Link from "@/components/link/user/link";
+import LinkList from "@/components/link/user/linkList";
 
 export const metadata = {
     title: "Links"
@@ -26,9 +26,9 @@ export default async function MyLinksPage({searchParams}: PageProps) {
     if (response?.status === 401) return <div className={"mt-32"}><UnauthorizedCard/></div>
 
     return (
-        <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-32"}>
+        <div className={"flex justify-center flex-col gap-10 items-center mx-auto py-20"}>
             <Suspense fallback={<LinksLoading/>}>
-                <Link links={response?.data}/>
+                <LinkList links={response?.data}/>
             </Suspense>
             <LinksPagination
                 currentPage={page}
