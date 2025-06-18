@@ -43,12 +43,15 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { setOpenMobile } = useSidebar();
   return (
       <Sidebar collapsible="offcanvas" {...props}>
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
+              <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5"
+                onClick={() => setOpenMobile(false)}
+                >
                 <Link href="/dashboard">
                   <IconInnerShadowTop className="!size-5" />
                   <span className="text-base font-semibold">Acme Inc.</span>
