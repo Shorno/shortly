@@ -6,7 +6,7 @@ interface LinksProps {
     links: ShortURL[] | null
 }
 
-export default async function Link({links}: LinksProps) {
+export default async function LinkList({links}: LinksProps) {
     if (links?.length === 0) return <NoLinksCard/>
 
     return (
