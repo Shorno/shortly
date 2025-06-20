@@ -46,7 +46,7 @@ export default function UserLinkForm() {
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full max-w-4xl px-4 2xl:px-0 mx-auto">
             <Card>
                 <CardHeader className="pb-4">
                     <CardTitle className="flex items-center gap-2 text-xl">
